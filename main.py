@@ -10,9 +10,14 @@ canvas = Canvas(Frame,width=1000,height=650,bg="white")
 canvas.pack()
 
 base_folder = os.path.dirname(__file__)
-image_path = os.path.join(base_folder, 'imgs/background.png')
+image_path_bg = os.path.join(base_folder, 'imgs/background.png')
+image_path_sheep = os.path.join(base_folder, 'imgs/sheep.png')
+image_path_bird = os.path.join(base_folder, 'imgs/bird.png')
 
-photo = PhotoImage(file=image_path)
+photo = PhotoImage(file=image_path_bg)
+
+icon_sheep = PhotoImage(file = image_path_sheep)
+icon_bird = PhotoImage(file = image_path_bird)
 
 canvas.create_image(0, 0, image=photo, anchor=NW)
 
@@ -20,18 +25,15 @@ canvas.create_text(850,260,fill="black",font="null 20",text="Votre Pion")
 
 canvas.create_text(850,380,fill="black",font="null 20",text="Ordinateur")
 
-def myfonc(nameBtn):
-    print("Case : ", nameBtn)
-
-case1 = Button(Frame, text = "1", anchor = W, bg="#15BDAC", command=lambda: myfonc(1))
-case2 = Button(Frame, text = "2", anchor = W, bg="#15BDAC", command=lambda: myfonc(2))
-case3 = Button(Frame, text = "3", anchor = W, bg="#15BDAC", command=lambda: myfonc(3))
-case4 = Button(Frame, text = "4", anchor = W, bg="#15BDAC", command=lambda: myfonc(4))
-case5 = Button(Frame, text = "5", anchor = W, bg="#15BDAC", command=lambda: myfonc(5))
-case6 = Button(Frame, text = "6", anchor = W, bg="#15BDAC", command=lambda: myfonc(6))
-case7 = Button(Frame, text = "7", anchor = W, bg="#15BDAC", command=lambda: myfonc(7))
-case8 = Button(Frame, text = "8", anchor = W, bg="#15BDAC", command=lambda: myfonc(8))
-case9 = Button(Frame, text = "9", anchor = W, bg="#15BDAC", command=lambda: myfonc(9))
+case1 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(1, 1))
+case2 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(2, 1))
+case3 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(3, 1))
+case4 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(4, 1))
+case5 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(5, 1))
+case6 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(6, 1))
+case7 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(7, 1))
+case8 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(8, 1))
+case9 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(9, 1))
 
 case1.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
 case2.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
@@ -52,6 +54,14 @@ case6_render = canvas.create_window(389, 235, anchor=NW, window=case6)
 case7_render = canvas.create_window(39, 413, anchor=NW, window=case7)
 case8_render = canvas.create_window(213, 413, anchor=NW, window=case8)
 case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
+
+def setCaseIcon(caseId, iconType):
+    print("!!")
+
+
+
+
+
 
 Frame.mainloop()
 
