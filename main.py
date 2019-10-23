@@ -1,5 +1,6 @@
 from tkinter import *
 import os
+from random import randint
 
 cases_player = []
 cases_computer = []
@@ -137,7 +138,23 @@ def setIcon(iconType, caseId):
             canvas.create_image(420,440,image=icon_sheep,anchor=NW)       
 
 def playComputer():
-    pass
+    global player_play
+    global cases_computer
+
+    random_case = randint(1,9)
+
+    if(random_case in cases_computer):
+        playComputer()
+    elif(random_case in cases_player):
+        playComputer()
+    else:
+        deleteCase(random_case)
+        setIcon(0, random_case)
+        player_play = 1
+        cases_computer.insert(0, random_case)
+        canvas.itemconfigure(info_txt, text="C'est à vous de jouer !")
+        canvas.coords(info_txt, 180, 619)
+        verifyWin()
 
 # 0 = no win | 1 = player win | 2 = computer win
 entity_win = 0
