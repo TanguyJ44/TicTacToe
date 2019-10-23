@@ -5,6 +5,8 @@ from random import randint
 cases_player = []
 cases_computer = []
 
+stop_computer_playing = 0
+
 Frame = Tk()
 
 Frame.title('Tik Tac Toe - Supinfo')
@@ -17,14 +19,18 @@ base_folder = os.path.dirname(__file__)
 image_path_bg = os.path.join(base_folder, 'imgs/background.png')
 image_path_sheep = os.path.join(base_folder, 'imgs/sheep.png')
 image_path_bird = os.path.join(base_folder, 'imgs/bird.png')
+image_path_msg_win = os.path.join(base_folder, 'imgs/msg_win.png')
+image_path_msg_lose = os.path.join(base_folder, 'imgs/msg_lose.png')
+image_path_msg_draw = os.path.join(base_folder, 'imgs/msg_draw.png')
 
 photo = PhotoImage(file=image_path_bg)
-
 icon_sheep = PhotoImage(file = image_path_sheep)
 icon_bird = PhotoImage(file = image_path_bird)
+msg_win = PhotoImage(file = image_path_msg_win)
+msg_lose = PhotoImage(file = image_path_msg_lose)
+msg_draw = PhotoImage(file = image_path_msg_draw)
 
 canvas.create_image(0, 0, image=photo, anchor=NW)
-
 canvas.create_text(850,260,fill="black",font="null 20",text="Votre Pion")
 canvas.create_text(850,380,fill="black",font="null 20",text="Ordinateur")
 
@@ -71,9 +77,10 @@ def setCaseIcon(caseId):
         player_play = 0
         cases_player.insert(0, caseId)
         verifyWin()
-        playComputer()
-        canvas.itemconfigure(info_txt, text="C'est à l'Ordinateur de jouer ...")
-        canvas.coords(info_txt, 215, 619)
+        if stop_computer_playing == 0:
+            playComputer()
+        # canvas.itemconfigure(info_txt, text="C'est à l'Ordinateur de jouer ...")
+        # canvas.coords(info_txt, 215, 619)
 
 def deleteCase(caseId):
     if caseId == 1:
@@ -152,15 +159,16 @@ def playComputer():
         setIcon(0, random_case)
         player_play = 1
         cases_computer.insert(0, random_case)
+        verifyWin()
         canvas.itemconfigure(info_txt, text="C'est à vous de jouer !")
         canvas.coords(info_txt, 180, 619)
-        verifyWin()
 
 # 0 = no win | 1 = player win | 2 = computer win
 entity_win = 0
 
 def verifyWin() :
     global entity_win
+    global stop_computer_playing
 
     if(1 in cases_player and 2 in cases_player and 3 in cases_player):
         entity_win = 1
@@ -198,16 +206,29 @@ def verifyWin() :
 
     if entity_win == 1:
         print("Joueur gagne !")
+        stop_computer_playing = 1
+        printGameMsg(1)
     if entity_win == 2:  
         print("Ordinateur gagne !")  
+        stop_computer_playing = 1
+        printGameMsg(2)
 
     cases_total = len(cases_player) + len(cases_computer)
     if(cases_total == 9 and entity_win == 0):
         print("Match nul !")
+        stop_computer_playing = 1
+        printGameMsg(0)
 
+# 0 = match nul | 1 = joueur gagne | 2 = ordinateur gagne
+def printGameMsg(gameStat):
 
-# canvas.delete(case1_render)
-# canvas.create_image(10,10,image=icon_sheep,anchor=NW)
+    if gameStat == 0:
+        image_draw = canvas.create_image(180, 130, image=msg_draw, anchor=NW)
+    elif gameStat == 1:
+        image_win = canvas.create_image(180, 130, image=msg_win, anchor=NW)
+    elif gameStat == 2:
+        image_lose = canvas.create_image(180, 130, image=msg_lose, anchor=NW)
+
 
 
 
