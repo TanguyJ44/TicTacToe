@@ -56,10 +56,36 @@ case8_render = canvas.create_window(213, 413, anchor=NW, window=case8)
 case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
 
 def setCaseIcon(caseId, iconType):
-    print("!!")
+    deleteCase(caseId)
+    setIcon(iconType)
+
+def deleteCase(caseId):
+    if caseId == 1:
+        canvas.delete(case1_render)
+    if caseId == 2:
+        canvas.delete(case2_render)
+    if caseId == 3:
+        canvas.delete(case3_render)
+    if caseId == 4:
+        canvas.delete(case4_render)
+    if caseId == 5:
+        canvas.delete(case5_render)
+    if caseId == 6:
+        canvas.delete(case6_render)
+    if caseId == 7:
+        canvas.delete(case7_render)
+    if caseId == 8:
+        canvas.delete(case8_render)
+    if caseId == 9:
+        canvas.delete(case9_render)
 
 
+def setIcon(iconType):
+    pass
 
+
+# canvas.delete(case1_render)
+# canvas.create_image(10,10,image=icon_sheep,anchor=NW)
 
 
 
