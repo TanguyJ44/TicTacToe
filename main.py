@@ -1,6 +1,9 @@
 from tkinter import *
 import os
 
+cases_player = []
+cases_computer = []
+
 Frame = Tk()
 
 Frame.title('Tik Tac Toe - Supinfo')
@@ -22,28 +25,29 @@ icon_bird = PhotoImage(file = image_path_bird)
 canvas.create_image(0, 0, image=photo, anchor=NW)
 
 canvas.create_text(850,260,fill="black",font="null 20",text="Votre Pion")
-
 canvas.create_text(850,380,fill="black",font="null 20",text="Ordinateur")
 
-case1 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(1, 1))
-case2 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(2, 1))
-case3 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(3, 1))
-case4 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(4, 1))
-case5 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(5, 1))
-case6 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(6, 1))
-case7 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(7, 1))
-case8 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(8, 1))
-case9 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(9, 1))
+info_txt = canvas.create_text(180,619,fill="#0A7E70",font="null 15",text="C'est à vous de jouer !")
 
-case1.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
-case2.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
-case3.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
-case4.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
-case5.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
-case6.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
-case7.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
-case8.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
-case9.configure(width=21, height=10, activebackground = "#33B5E5", relief = FLAT)
+case1 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(1))
+case2 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(2))
+case3 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(3))
+case4 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(4))
+case5 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(5))
+case6 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(6))
+case7 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(7))
+case8 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(8))
+case9 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(9))
+
+case1.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case2.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case3.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case4.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case5.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case6.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case7.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case8.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case9.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
 
 case1_render = canvas.create_window(39, 60, anchor=NW, window=case1)
 case2_render = canvas.create_window(213, 60, anchor=NW, window=case2)
@@ -55,9 +59,20 @@ case7_render = canvas.create_window(39, 413, anchor=NW, window=case7)
 case8_render = canvas.create_window(213, 413, anchor=NW, window=case8)
 case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
 
-def setCaseIcon(caseId, iconType):
-    deleteCase(caseId)
-    setIcon(iconType, caseId)
+player_play = 1
+
+def setCaseIcon(caseId):
+    global player_play
+    global cases_player
+    if player_play == 1:
+        deleteCase(caseId)
+        setIcon(1, caseId)
+        player_play = 0
+        cases_player.insert(0, caseId)
+        verifyWin()
+        playComputer()
+        canvas.itemconfigure(info_txt, text="C'est à l'Ordinateur de jouer ...")
+        canvas.coords(info_txt, 215, 619)
 
 def deleteCase(caseId):
     if caseId == 1:
@@ -100,7 +115,7 @@ def setIcon(iconType, caseId):
             canvas.create_image(240,440,image=icon_bird,anchor=NW) 
         if caseId == 9:
             canvas.create_image(420,440,image=icon_bird,anchor=NW) 
-            
+
     else:
         if caseId == 1:
             canvas.create_image(60,80,image=icon_sheep,anchor=NW)
@@ -121,6 +136,57 @@ def setIcon(iconType, caseId):
         if caseId == 9:
             canvas.create_image(420,440,image=icon_sheep,anchor=NW)       
 
+def playComputer():
+    pass
+
+# 0 = no win | 1 = player win | 2 = computer win
+entity_win = 0
+
+def verifyWin() :
+    global entity_win
+
+    if(1 in cases_player and 2 in cases_player and 3 in cases_player):
+        entity_win = 1
+    if(4 in cases_player and 5 in cases_player and 6 in cases_player):
+        entity_win = 1
+    if(7 in cases_player and 8 in cases_player and 9 in cases_player):
+        entity_win = 1
+    if(1 in cases_player and 4 in cases_player and 7 in cases_player):
+        entity_win = 1
+    if(2 in cases_player and 5 in cases_player and 8 in cases_player):
+        entity_win = 1
+    if(3 in cases_player and 6 in cases_player and 9 in cases_player):
+        entity_win = 1
+    if(1 in cases_player and 5 in cases_player and 9 in cases_player):
+        entity_win = 1
+    if(3 in cases_player and 5 in cases_player and 7 in cases_player):
+        entity_win = 1
+
+    if(1 in cases_computer and 2 in cases_computer and 3 in cases_computer):
+        entity_win = 2
+    if(4 in cases_computer and 5 in cases_computer and 6 in cases_computer):
+        entity_win = 2
+    if(7 in cases_computer and 8 in cases_computer and 9 in cases_computer):
+        entity_win = 2
+    if(1 in cases_computer and 4 in cases_computer and 7 in cases_computer):
+        entity_win = 2
+    if(2 in cases_computer and 5 in cases_computer and 8 in cases_computer):
+        entity_win = 2
+    if(3 in cases_computer and 6 in cases_computer and 9 in cases_computer):
+        entity_win = 2
+    if(1 in cases_computer and 5 in cases_computer and 9 in cases_computer):
+        entity_win = 2
+    if(3 in cases_computer and 5 in cases_computer and 7 in cases_computer):
+        entity_win = 2
+
+    if entity_win == 1:
+        print("Joueur gagne !")
+    if entity_win == 2:  
+        print("Ordinateur gagne !")  
+
+    cases_total = len(cases_player) + len(cases_computer)
+    if(cases_total == 9 and entity_win == 0):
+        print("Match nul !")
 
 
 # canvas.delete(case1_render)
