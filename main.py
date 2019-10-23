@@ -57,7 +57,7 @@ case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
 
 def setCaseIcon(caseId, iconType):
     deleteCase(caseId)
-    setIcon(iconType)
+    setIcon(iconType, caseId)
 
 def deleteCase(caseId):
     if caseId == 1:
@@ -80,8 +80,47 @@ def deleteCase(caseId):
         canvas.delete(case9_render)
 
 
-def setIcon(iconType):
-    pass
+def setIcon(iconType, caseId):
+    if iconType == 0:
+        if caseId == 1:
+            canvas.create_image(60,80,image=icon_bird,anchor=NW)
+        if caseId == 2:
+            canvas.create_image(240,80,image=icon_bird,anchor=NW) 
+        if caseId == 3:
+            canvas.create_image(420,80,image=icon_bird,anchor=NW) 
+        if caseId == 4:
+            canvas.create_image(60,260,image=icon_bird,anchor=NW)
+        if caseId == 5:
+            canvas.create_image(240,260,image=icon_bird,anchor=NW) 
+        if caseId == 6:
+            canvas.create_image(420,260,image=icon_bird,anchor=NW)
+        if caseId == 7:
+            canvas.create_image(60,440,image=icon_bird,anchor=NW)
+        if caseId == 8:
+            canvas.create_image(240,440,image=icon_bird,anchor=NW) 
+        if caseId == 9:
+            canvas.create_image(420,440,image=icon_bird,anchor=NW) 
+            
+    else:
+        if caseId == 1:
+            canvas.create_image(60,80,image=icon_sheep,anchor=NW)
+        if caseId == 2:
+            canvas.create_image(240,80,image=icon_sheep,anchor=NW) 
+        if caseId == 3:
+            canvas.create_image(420,80,image=icon_sheep,anchor=NW) 
+        if caseId == 4:
+            canvas.create_image(60,260,image=icon_sheep,anchor=NW)
+        if caseId == 5:
+            canvas.create_image(240,260,image=icon_sheep,anchor=NW) 
+        if caseId == 6:
+            canvas.create_image(420,260,image=icon_sheep,anchor=NW)
+        if caseId == 7:
+            canvas.create_image(60,440,image=icon_sheep,anchor=NW)
+        if caseId == 8:
+            canvas.create_image(240,440,image=icon_sheep,anchor=NW) 
+        if caseId == 9:
+            canvas.create_image(420,440,image=icon_sheep,anchor=NW)       
+
 
 
 # canvas.delete(case1_render)
