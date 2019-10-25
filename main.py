@@ -7,6 +7,10 @@ cases_computer = []
 
 stop_computer_playing = 0
 
+icon_bird_render = 0
+
+finish_game = False
+
 Frame = Tk()
 
 Frame.title('Tik Tac Toe - Supinfo')
@@ -104,25 +108,26 @@ def deleteCase(caseId):
 
 
 def setIcon(iconType, caseId):
+    global icon_bird_render
     if iconType == 0:
         if caseId == 1:
-            canvas.create_image(60,80,image=icon_bird,anchor=NW)
+            icon_bird_render = canvas.create_image(60,80,image=icon_bird,anchor=NW)
         if caseId == 2:
-            canvas.create_image(240,80,image=icon_bird,anchor=NW) 
+            icon_bird_render = canvas.create_image(240,80,image=icon_bird,anchor=NW) 
         if caseId == 3:
-            canvas.create_image(420,80,image=icon_bird,anchor=NW) 
+            icon_bird_render = canvas.create_image(420,80,image=icon_bird,anchor=NW) 
         if caseId == 4:
-            canvas.create_image(60,260,image=icon_bird,anchor=NW)
+            icon_bird_render = canvas.create_image(60,260,image=icon_bird,anchor=NW)
         if caseId == 5:
-            canvas.create_image(240,260,image=icon_bird,anchor=NW) 
+            icon_bird_render = canvas.create_image(240,260,image=icon_bird,anchor=NW) 
         if caseId == 6:
-            canvas.create_image(420,260,image=icon_bird,anchor=NW)
+            icon_bird_render = canvas.create_image(420,260,image=icon_bird,anchor=NW)
         if caseId == 7:
-            canvas.create_image(60,440,image=icon_bird,anchor=NW)
+            icon_bird_render = canvas.create_image(60,440,image=icon_bird,anchor=NW)
         if caseId == 8:
-            canvas.create_image(240,440,image=icon_bird,anchor=NW) 
+            icon_bird_render = canvas.create_image(240,440,image=icon_bird,anchor=NW) 
         if caseId == 9:
-            canvas.create_image(420,440,image=icon_bird,anchor=NW) 
+            icon_bird_render = canvas.create_image(420,440,image=icon_bird,anchor=NW) 
 
     else:
         if caseId == 1:
@@ -143,6 +148,12 @@ def setIcon(iconType, caseId):
             canvas.create_image(240,440,image=icon_sheep,anchor=NW) 
         if caseId == 9:
             canvas.create_image(420,440,image=icon_sheep,anchor=NW)       
+
+
+def deleteIcons():
+    for i in range(14, 13+len(cases_player)+len(cases_computer)+1):
+        canvas.delete(i)
+
 
 def playComputer():
     global player_play
@@ -219,23 +230,47 @@ def verifyWin() :
         stop_computer_playing = 1
         printGameMsg(0)
 
+
+image_msg_delete = 0
+
 # 0 = match nul | 1 = joueur gagne | 2 = ordinateur gagne
 def printGameMsg(gameStat):
+    global finish_game
+    global image_msg_delete
 
     for i in range(9):
         deleteCase(i+1)
 
     if gameStat == 0:
         image_draw = canvas.create_image(180, 130, image=msg_draw, anchor=NW)
+        image_msg_delete = image_draw
     elif gameStat == 1:
         image_win = canvas.create_image(180, 130, image=msg_win, anchor=NW)
+        image_msg_delete = image_win
     elif gameStat == 2:
         image_lose = canvas.create_image(180, 130, image=msg_lose, anchor=NW)
+        image_msg_delete = image_lose
+
+    finish_game = True
 
 
 def reloadGame():
-    pass
+    global image_msg_delete
 
+    canvas.delete(image_msg_delete)
+    deleteIcons()
+
+
+def mouseClickLeftButton(event):
+    global finish_game
+
+    if finish_game == True:
+        reloadGame()
+        finish_game = False
+
+
+
+Frame.bind("<Button-1>", mouseClickLeftButton)
 
 Frame.mainloop()
 
