@@ -222,6 +222,9 @@ def verifyWin() :
 # 0 = match nul | 1 = joueur gagne | 2 = ordinateur gagne
 def printGameMsg(gameStat):
 
+    for i in range(9):
+        deleteCase(i+1)
+
     if gameStat == 0:
         image_draw = canvas.create_image(180, 130, image=msg_draw, anchor=NW)
     elif gameStat == 1:
@@ -230,6 +233,8 @@ def printGameMsg(gameStat):
         image_lose = canvas.create_image(180, 130, image=msg_lose, anchor=NW)
 
 
+def reloadGame():
+    pass
 
 
 Frame.mainloop()
