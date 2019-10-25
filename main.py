@@ -45,6 +45,8 @@ label_computer = canvas.create_text(850,380,fill="black",font="null 20",text="Or
 
 info_txt = canvas.create_text(180,619,fill="#0A7E70",font="null 15",text="C'est à vous de jouer !")
 
+render_switchBtn = 0
+
 switchBtn = Button(Frame, anchor = W, image=image_switch, bg="#15BDAC", command=lambda: switchingIcon())
 switchBtn.configure(width=30, height=15, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
@@ -294,6 +296,7 @@ image_msg_delete = 0
 def printGameMsg(gameStat):
     global finish_game
     global image_msg_delete
+    global render_switchBtn
 
     for i in range(9):
         deleteCase(i+1)
@@ -320,6 +323,7 @@ def reloadGame():
     global entity_win
     global image_msg_delete
     global stop_computer_playing
+    global render_switchBtn
 
     canvas.delete(image_msg_delete)
     deleteIcons()
