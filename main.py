@@ -10,6 +10,8 @@ stop_computer_playing = 0
 icon_bird_render = 0
 
 switchIcon = False
+
+start_game = False
 finish_game = False
 
 Frame = Tk()
@@ -81,7 +83,7 @@ case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
 def switchingIcon():
     global switchIcon
 
-    if switchIcon == False:
+    if switchIcon == False and start_game == False:
         canvas.itemconfigure(label_player, text="Ordinateur")
         canvas.itemconfigure(label_computer, text="Votre Pion")
         switchIcon = True
@@ -96,9 +98,17 @@ player_play = 1
 def setCaseIcon(caseId):
     global player_play
     global cases_player
+    global start_game
+
+    if start_game == False:
+        start_game = True
+
     if player_play == 1:
         deleteCase(caseId)
-        setIcon(1, caseId)
+        if switchIcon == False:
+            setIcon(1, caseId)
+        else:
+            setIcon(0, caseId)
         player_play = 0
         cases_player.insert(0, caseId)
         verifyWin()
@@ -188,7 +198,10 @@ def playComputer():
         playComputer()
     else:
         deleteCase(random_case)
-        setIcon(0, random_case)
+        if switchIcon == False:
+            setIcon(0, random_case)
+        else:
+            setIcon(1, random_case)
         player_play = 1
         cases_computer.insert(0, random_case)
         verifyWin()
