@@ -16,7 +16,7 @@ finish_game = False
 
 Frame = Tk()
 
-Frame.title('Tik Tac Toe - Supinfo')
+Frame.title('Tik Tac Toe - Tanguy J | Supinfo.com')
 Frame.resizable(width=False, height=False)
 
 canvas = Canvas(Frame,width=1000,height=650,bg="white")
@@ -69,15 +69,38 @@ case7.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT
 case8.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 case9.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
-case1_render = canvas.create_window(39, 60, anchor=NW, window=case1)
-case2_render = canvas.create_window(213, 60, anchor=NW, window=case2)
-case3_render = canvas.create_window(389, 60, anchor=NW, window=case3)
-case4_render = canvas.create_window(39, 237, anchor=NW, window=case4)
-case5_render = canvas.create_window(213, 235, anchor=NW, window=case5)
-case6_render = canvas.create_window(389, 235, anchor=NW, window=case6)
-case7_render = canvas.create_window(39, 413, anchor=NW, window=case7)
-case8_render = canvas.create_window(213, 413, anchor=NW, window=case8)
-case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
+case1_render = 0
+case2_render = 0
+case3_render = 0
+case4_render = 0
+case5_render = 0
+case6_render = 0
+case7_render = 0
+case8_render = 0
+case9_render = 0
+
+def createCasesButton():
+    global case1_render
+    global case2_render
+    global case3_render
+    global case4_render
+    global case5_render
+    global case6_render
+    global case7_render
+    global case8_render
+    global case9_render
+
+    case1_render = canvas.create_window(39, 60, anchor=NW, window=case1)
+    case2_render = canvas.create_window(213, 60, anchor=NW, window=case2)
+    case3_render = canvas.create_window(389, 60, anchor=NW, window=case3)
+    case4_render = canvas.create_window(39, 237, anchor=NW, window=case4)
+    case5_render = canvas.create_window(213, 235, anchor=NW, window=case5)
+    case6_render = canvas.create_window(389, 235, anchor=NW, window=case6)
+    case7_render = canvas.create_window(39, 413, anchor=NW, window=case7)
+    case8_render = canvas.create_window(213, 413, anchor=NW, window=case8)
+    case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
+
+createCasesButton()
 
 
 def switchingIcon():
@@ -87,7 +110,7 @@ def switchingIcon():
         canvas.itemconfigure(label_player, text="Ordinateur")
         canvas.itemconfigure(label_computer, text="Votre Pion")
         switchIcon = True
-    else:
+    elif switchIcon == True and start_game == False:
         canvas.itemconfigure(label_player, text="Votre Pion")
         canvas.itemconfigure(label_computer, text="Ordinateur")
         switchIcon = False
@@ -293,12 +316,26 @@ def printGameMsg(gameStat):
 def reloadGame():
     global image_msg_delete
     global start_game
+    global player_play
+    global entity_win
+    global image_msg_delete
+    global stop_computer_playing
 
     canvas.delete(image_msg_delete)
     deleteIcons()
+    createCasesButton()
 
     start_game = False
     render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
+
+    del cases_player[:]
+    del cases_computer[:]
+
+    player_play = 1
+    entity_win = 0
+    image_msg_delete = 0
+    stop_computer_playing = 0
+
 
 
 def mouseClickLeftButton(event):
