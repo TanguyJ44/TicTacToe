@@ -9,6 +9,7 @@ stop_computer_playing = 0
 
 icon_bird_render = 0
 
+switchIcon = False
 finish_game = False
 
 Frame = Tk()
@@ -26,6 +27,7 @@ image_path_bird = os.path.join(base_folder, 'imgs/bird.png')
 image_path_msg_win = os.path.join(base_folder, 'imgs/msg_win.png')
 image_path_msg_lose = os.path.join(base_folder, 'imgs/msg_lose.png')
 image_path_msg_draw = os.path.join(base_folder, 'imgs/msg_draw.png')
+image_path_switch = os.path.join(base_folder, 'imgs/switch.png')
 
 photo = PhotoImage(file=image_path_bg)
 icon_sheep = PhotoImage(file = image_path_sheep)
@@ -33,12 +35,17 @@ icon_bird = PhotoImage(file = image_path_bird)
 msg_win = PhotoImage(file = image_path_msg_win)
 msg_lose = PhotoImage(file = image_path_msg_lose)
 msg_draw = PhotoImage(file = image_path_msg_draw)
+image_switch = PhotoImage(file = image_path_switch)
 
 canvas.create_image(0, 0, image=photo, anchor=NW)
-canvas.create_text(850,260,fill="black",font="null 20",text="Votre Pion")
-canvas.create_text(850,380,fill="black",font="null 20",text="Ordinateur")
+label_player = canvas.create_text(850,260,fill="black",font="null 20",text="Votre Pion")
+label_computer = canvas.create_text(850,380,fill="black",font="null 20",text="Ordinateur")
 
 info_txt = canvas.create_text(180,619,fill="#0A7E70",font="null 15",text="C'est à vous de jouer !")
+
+switchBtn = Button(Frame, anchor = W, image=image_switch, bg="#15BDAC", command=lambda: switchingIcon())
+switchBtn.configure(width=30, height=15, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+canvas.create_window(800, 310, anchor=NW, window=switchBtn)
 
 case1 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(1))
 case2 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(2))
@@ -50,15 +57,15 @@ case7 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(7))
 case8 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(8))
 case9 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(9))
 
-case1.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
-case2.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
-case3.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
-case4.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
-case5.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
-case6.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
-case7.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
-case8.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
-case9.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT)
+case1.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+case2.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+case3.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+case4.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+case5.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+case6.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+case7.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+case8.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
+case9.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
 case1_render = canvas.create_window(39, 60, anchor=NW, window=case1)
 case2_render = canvas.create_window(213, 60, anchor=NW, window=case2)
@@ -69,6 +76,20 @@ case6_render = canvas.create_window(389, 235, anchor=NW, window=case6)
 case7_render = canvas.create_window(39, 413, anchor=NW, window=case7)
 case8_render = canvas.create_window(213, 413, anchor=NW, window=case8)
 case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
+
+
+def switchingIcon():
+    global switchIcon
+
+    if switchIcon == False:
+        canvas.itemconfigure(label_player, text="Ordinateur")
+        canvas.itemconfigure(label_computer, text="Votre Pion")
+        switchIcon = True
+    else:
+        canvas.itemconfigure(label_player, text="Votre Pion")
+        canvas.itemconfigure(label_computer, text="Ordinateur")
+        switchIcon = False
+
 
 player_play = 1
 
