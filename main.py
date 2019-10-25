@@ -7,8 +7,6 @@ cases_computer = []
 
 stop_computer_playing = 0
 
-icon_bird_render = 0
-
 switchIcon = False
 
 start_game = False
@@ -163,52 +161,130 @@ def deleteCase(caseId):
         canvas.delete(case9_render)
 
 
+icon_bird1_render = 0
+icon_bird2_render = 0
+icon_bird3_render = 0
+icon_bird4_render = 0
+icon_bird5_render = 0
+icon_bird6_render = 0
+icon_bird7_render = 0
+icon_bird8_render = 0
+icon_bird9_render = 0
+
+icon_sheep1_render = 0
+icon_sheep2_render = 0
+icon_sheep3_render = 0
+icon_sheep4_render = 0
+icon_sheep5_render = 0
+icon_sheep6_render = 0
+icon_sheep7_render = 0
+icon_sheep8_render = 0
+icon_sheep9_render = 0
+
 def setIcon(iconType, caseId):
-    global icon_bird_render
+    global icon_bird1_render
+    global icon_bird2_render
+    global icon_bird3_render
+    global icon_bird4_render
+    global icon_bird5_render
+    global icon_bird6_render
+    global icon_bird7_render
+    global icon_bird8_render
+    global icon_bird9_render
+
+    global icon_sheep1_render
+    global icon_sheep2_render
+    global icon_sheep3_render
+    global icon_sheep4_render
+    global icon_sheep5_render
+    global icon_sheep6_render
+    global icon_sheep7_render
+    global icon_sheep8_render
+    global icon_sheep9_render
+
     if iconType == 0:
         if caseId == 1:
-            icon_bird_render = canvas.create_image(60,80,image=icon_bird,anchor=NW)
+            icon_bird1_render = canvas.create_image(60,80,image=icon_bird,anchor=NW)
         if caseId == 2:
-            icon_bird_render = canvas.create_image(240,80,image=icon_bird,anchor=NW) 
+            icon_bird2_render = canvas.create_image(240,80,image=icon_bird,anchor=NW) 
         if caseId == 3:
-            icon_bird_render = canvas.create_image(420,80,image=icon_bird,anchor=NW) 
+            icon_bird3_render = canvas.create_image(420,80,image=icon_bird,anchor=NW) 
         if caseId == 4:
-            icon_bird_render = canvas.create_image(60,260,image=icon_bird,anchor=NW)
+            icon_bird4_render = canvas.create_image(60,260,image=icon_bird,anchor=NW)
         if caseId == 5:
-            icon_bird_render = canvas.create_image(240,260,image=icon_bird,anchor=NW) 
+            icon_bird5_render = canvas.create_image(240,260,image=icon_bird,anchor=NW) 
         if caseId == 6:
-            icon_bird_render = canvas.create_image(420,260,image=icon_bird,anchor=NW)
+            icon_bird6_render = canvas.create_image(420,260,image=icon_bird,anchor=NW)
         if caseId == 7:
-            icon_bird_render = canvas.create_image(60,440,image=icon_bird,anchor=NW)
+            icon_bird7_render = canvas.create_image(60,440,image=icon_bird,anchor=NW)
         if caseId == 8:
-            icon_bird_render = canvas.create_image(240,440,image=icon_bird,anchor=NW) 
+            icon_bird8_render = canvas.create_image(240,440,image=icon_bird,anchor=NW) 
         if caseId == 9:
-            icon_bird_render = canvas.create_image(420,440,image=icon_bird,anchor=NW) 
+            icon_bird9_render = canvas.create_image(420,440,image=icon_bird,anchor=NW) 
 
     else:
         if caseId == 1:
-            canvas.create_image(60,80,image=icon_sheep,anchor=NW)
+            icon_sheep1_render = canvas.create_image(60,80,image=icon_sheep,anchor=NW)
         if caseId == 2:
-            canvas.create_image(240,80,image=icon_sheep,anchor=NW) 
+            icon_sheep2_render = canvas.create_image(240,80,image=icon_sheep,anchor=NW) 
         if caseId == 3:
-            canvas.create_image(420,80,image=icon_sheep,anchor=NW) 
+            icon_sheep3_render = canvas.create_image(420,80,image=icon_sheep,anchor=NW) 
         if caseId == 4:
-            canvas.create_image(60,260,image=icon_sheep,anchor=NW)
+            icon_sheep4_render = canvas.create_image(60,260,image=icon_sheep,anchor=NW)
         if caseId == 5:
-            canvas.create_image(240,260,image=icon_sheep,anchor=NW) 
+            icon_sheep5_render = canvas.create_image(240,260,image=icon_sheep,anchor=NW) 
         if caseId == 6:
-            canvas.create_image(420,260,image=icon_sheep,anchor=NW)
+            icon_sheep6_render = canvas.create_image(420,260,image=icon_sheep,anchor=NW)
         if caseId == 7:
-            canvas.create_image(60,440,image=icon_sheep,anchor=NW)
+            icon_sheep7_render = canvas.create_image(60,440,image=icon_sheep,anchor=NW)
         if caseId == 8:
-            canvas.create_image(240,440,image=icon_sheep,anchor=NW) 
+            icon_sheep8_render = canvas.create_image(240,440,image=icon_sheep,anchor=NW) 
         if caseId == 9:
-            canvas.create_image(420,440,image=icon_sheep,anchor=NW)       
-
+            icon_sheep9_render = canvas.create_image(420,440,image=icon_sheep,anchor=NW)       
 
 def deleteIcons():
-    for i in range(14, 14+len(cases_player)+len(cases_computer)+1):
-        canvas.delete(i)
+    global icon_bird1_render
+    global icon_bird2_render
+    global icon_bird3_render
+    global icon_bird4_render
+    global icon_bird5_render
+    global icon_bird6_render
+    global icon_bird7_render
+    global icon_bird8_render
+    global icon_bird9_render
+
+    global icon_sheep1_render
+    global icon_sheep2_render
+    global icon_sheep3_render
+    global icon_sheep4_render
+    global icon_sheep5_render
+    global icon_sheep6_render
+    global icon_sheep7_render
+    global icon_sheep8_render
+    global icon_sheep9_render
+
+    canvas.delete(icon_bird1_render)
+    canvas.delete(icon_bird2_render)
+    canvas.delete(icon_bird3_render)
+    canvas.delete(icon_bird4_render)
+    canvas.delete(icon_bird5_render)
+    canvas.delete(icon_bird6_render)
+    canvas.delete(icon_bird7_render)
+    canvas.delete(icon_bird8_render)
+    canvas.delete(icon_bird9_render)
+
+    canvas.delete(icon_sheep1_render)
+    canvas.delete(icon_sheep2_render)
+    canvas.delete(icon_sheep3_render)
+    canvas.delete(icon_sheep4_render)
+    canvas.delete(icon_sheep5_render)
+    canvas.delete(icon_sheep6_render)
+    canvas.delete(icon_sheep7_render)
+    canvas.delete(icon_sheep8_render)
+    canvas.delete(icon_sheep9_render)
+
+    # for i in range(i, i+len(cases_player)+len(cases_computer)+1):
+    #     canvas.delete(i)
 
 
 def playComputer():
@@ -341,7 +417,6 @@ def reloadGame():
     stop_computer_playing = 0
 
 
-
 def mouseClickLeftButton(event):
     global finish_game
 
@@ -350,20 +425,6 @@ def mouseClickLeftButton(event):
         finish_game = False
 
 
-
 Frame.bind("<Button-1>", mouseClickLeftButton)
 
 Frame.mainloop()
-
-
-
-
-#15BDAC
-
-# canvas.create_rectangle(50,50,600,600,width=2)
-
-# canvas.create_line(50,230,600,230,fill="red",width=2)
-# canvas.create_line(50,420,600,420,fill="red",width=2)
-
-# canvas.create_line(230,50,230,600,fill="red",width=2)
-# canvas.create_line(420,50,420,600,fill="red",width=2)
