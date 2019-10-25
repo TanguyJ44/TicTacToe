@@ -47,7 +47,7 @@ info_txt = canvas.create_text(180,619,fill="#0A7E70",font="null 15",text="C'est 
 
 switchBtn = Button(Frame, anchor = W, image=image_switch, bg="#15BDAC", command=lambda: switchingIcon())
 switchBtn.configure(width=30, height=15, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
-canvas.create_window(800, 310, anchor=NW, window=switchBtn)
+render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
 
 case1 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(1))
 case2 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(2))
@@ -182,7 +182,7 @@ def setIcon(iconType, caseId):
 
 
 def deleteIcons():
-    for i in range(14, 13+len(cases_player)+len(cases_computer)+1):
+    for i in range(14, 14+len(cases_player)+len(cases_computer)+1):
         canvas.delete(i)
 
 
@@ -275,6 +275,8 @@ def printGameMsg(gameStat):
     for i in range(9):
         deleteCase(i+1)
 
+    canvas.delete(render_switchBtn)
+
     if gameStat == 0:
         image_draw = canvas.create_image(180, 130, image=msg_draw, anchor=NW)
         image_msg_delete = image_draw
@@ -290,9 +292,13 @@ def printGameMsg(gameStat):
 
 def reloadGame():
     global image_msg_delete
+    global start_game
 
     canvas.delete(image_msg_delete)
     deleteIcons()
+
+    start_game = False
+    render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
 
 
 def mouseClickLeftButton(event):
