@@ -65,7 +65,6 @@ case9.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT
 def createCasesButton():
     casesmanager.createCasesButton(canvas, NW, case1, case2, case3, case4, case5, case6, case7, case8, case9)
 
-
 createCasesButton()
 
 
@@ -75,23 +74,6 @@ def switchingIcon():
 
 def setCaseIcon(caseId):
     computerplaying.setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, msg_lose, info_txt)
-
-
-def deleteCase(caseId):
-    casesmanager.deleteCase(canvas, caseId)
-
-
-def setIcon(iconType, caseId):
-    iconsmanager.setIcon(canvas, iconType, caseId, icon_bird, icon_sheep, NW)   
-
-
-def deleteIcons():
-    iconsmanager.deleteIcons(canvas)
-
-
-# # 0 = match nul | 1 = joueur gagne | 2 = ordinateur gagne
-def printGameMsg(gameStat):
-    utils.printGameMsg(canvas, NW, gameStat, msg_draw, msg_win, msg_lose)
 
 
 def mouseClickLeftButton(event):

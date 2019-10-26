@@ -56,5 +56,3 @@ def setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, ms
         utils.verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose)
         if stop_computer_playing == 0:
             playComputer(canvas, switchIcon, info_txt, icon_bird, icon_sheep, NW, stop_computer_playing,msg_draw, msg_win, msg_lose)
-
-
