@@ -36,11 +36,10 @@ label_computer = canvas.create_text(850,380,fill="black",font="null 20",text="Or
 
 info_txt = canvas.create_text(180,619,fill="#0A7E70",font="null 15",text="C'est à vous de jouer !")
 
-render_switchBtn = 0
-
 switchBtn = Button(Frame, anchor = W, image=image_switch, bg="#15BDAC", command=lambda: switchingIcon())
 switchBtn.configure(width=30, height=15, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
-render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
+
+utils.createSwitchButton(canvas, NW, switchBtn)
 
 case1 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(1))
 case2 = Button(Frame, anchor = W, bg="#15BDAC", command=lambda: setCaseIcon(2))
@@ -75,7 +74,7 @@ def switchingIcon():
 
 
 def setCaseIcon(caseId):
-    computerplaying.setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, msg_lose, render_switchBtn, info_txt)
+    computerplaying.setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, msg_lose, info_txt)
 
 
 def deleteCase(caseId):
@@ -92,7 +91,7 @@ def deleteIcons():
 
 # # 0 = match nul | 1 = joueur gagne | 2 = ordinateur gagne
 def printGameMsg(gameStat):
-    utils.printGameMsg(canvas, NW, gameStat, msg_draw, msg_win, msg_lose, render_switchBtn)
+    utils.printGameMsg(canvas, NW, gameStat, msg_draw, msg_win, msg_lose)
 
 
 def mouseClickLeftButton(event):

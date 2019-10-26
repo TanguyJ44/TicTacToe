@@ -6,7 +6,9 @@ entity_win = 0
 
 finish_game = False
 
-def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose, render_switchBtn) :
+render_switchBtn = 0
+
+def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose) :
     global entity_win
 
     if(1 in cases_player and 2 in cases_player and 3 in cases_player):
@@ -46,26 +48,26 @@ def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_l
     if entity_win == 1:
         print("Joueur gagne !")
         computerplaying.stop_computer_playing = 1
-        printGameMsg(canvas, NW, 1, msg_draw, msg_win, msg_lose, render_switchBtn)
+        printGameMsg(canvas, NW, 1, msg_draw, msg_win, msg_lose)
     if entity_win == 2:  
         print("Ordinateur gagne !")  
         computerplaying.stop_computer_playing = 1
-        printGameMsg(canvas, NW, 2, msg_draw, msg_win, msg_lose, render_switchBtn)
+        printGameMsg(canvas, NW, 2, msg_draw, msg_win, msg_lose)
 
     cases_total = len(cases_player) + len(cases_computer)
     if(cases_total == 9 and entity_win == 0):
         print("Match nul !")
         computerplaying.stop_computer_playing = 1
-        printGameMsg(canvas, NW, 0, msg_draw, msg_win, msg_lose, render_switchBtn)
+        printGameMsg(canvas, NW, 0, msg_draw, msg_win, msg_lose)
 
 
 image_msg_delete = 0
 
 # 0 = match nul | 1 = joueur gagne | 2 = ordinateur gagne
-def printGameMsg(canvas, NW, gameStat, msg_draw, msg_win, msg_lose, render_switchBtn):
+def printGameMsg(canvas, NW, gameStat, msg_draw, msg_win, msg_lose):
     global finish_game
     global image_msg_delete
-    #global render_switchBtn
+    global render_switchBtn
 
     for i in range(9):
         casesmanager.deleteCase(canvas, i+1)
@@ -116,3 +118,8 @@ def switchingIcon(canvas, label_player, label_computer):
         canvas.itemconfigure(label_player, text="Votre Pion")
         canvas.itemconfigure(label_computer, text="Ordinateur")
         computerplaying.switchIcon = False
+
+
+def createSwitchButton(canvas, NW, switchBtn):
+    global render_switchBtn
+    render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
