@@ -2,6 +2,7 @@ from random import randint
 import IconsManager as iconsmanager
 import CasesManager as casesmanager
 import Utils as utils
+import threading
 
 start_game = False
 
@@ -55,4 +56,8 @@ def setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, ms
         cases_player.insert(0, caseId)
         utils.verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose)
         if stop_computer_playing == 0:
-            playComputer(canvas, switchIcon, info_txt, icon_bird, icon_sheep, NW, stop_computer_playing,msg_draw, msg_win, msg_lose)
+            canvas.itemconfigure(info_txt, text="C'est à l'Ordinateur de jouer ...")
+            canvas.coords(info_txt, 215, 619)
+            t = threading.Timer(0.8, playComputer, [canvas, switchIcon, info_txt, icon_bird, icon_sheep, NW, stop_computer_playing,msg_draw, msg_win, msg_lose])
+            t.start()
+
