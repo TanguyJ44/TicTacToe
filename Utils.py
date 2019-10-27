@@ -1,6 +1,7 @@
 import IconsManager as iconsmanager
 import CasesManager as casesmanager
 import ComputerPlaying as computerplaying
+import PossibleCombinations as possiblecombinations
 
 entity_win = 0
 
@@ -102,6 +103,11 @@ def reloadGame(canvas, NW, switchBtn, case1, case2, case3, case4, case5, case6, 
 
     del computerplaying.cases_player[:]
     del computerplaying.cases_computer[:]
+    del possiblecombinations.combinationsTreated[:]
+    del possiblecombinations.computerAttackTreated[:]
+
+    possiblecombinations.defend = 0
+    possiblecombinations.attack = 0
 
     computerplaying.player_play = 1
     entity_win = 0
