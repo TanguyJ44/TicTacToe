@@ -19,87 +19,96 @@ def calcCombinations(c_player, c_computer):
     cases_player = c_player
     cases_computer = c_computer
 
-    if(1 in cases_player and 2 in cases_player and 1 not in combinationsTreated and checkCaseEmpty(3) == True):
-        combinationsTreated.insert(0, 1)
-        defend = 3
-    elif(2 in cases_player and 3 in cases_player and 2 not in combinationsTreated and checkCaseEmpty(1) == True):
-        combinationsTreated.insert(0, 2)
-        defend = 1   
-    elif(1 in cases_player and 3 in cases_player and 3 not in combinationsTreated and checkCaseEmpty(2) == True):
-        combinationsTreated.insert(0, 3)
-        defend = 2    
+    lower = 1
+    upper = 2
+    result = 3
+    index = 1
 
-    elif(4 in cases_player and 5 in cases_player and 4 not in combinationsTreated and checkCaseEmpty(6) == True):
-        combinationsTreated.insert(0, 4)
-        defend = 6
-    elif(5 in cases_player and 6 in cases_player and 5 not in combinationsTreated and checkCaseEmpty(4) == True):
-        combinationsTreated.insert(0, 5)
-        defend = 4   
-    elif(4 in cases_player and 6 in cases_player and 6 not in combinationsTreated and checkCaseEmpty(5) == True):
-        combinationsTreated.insert(0, 6)
-        defend = 5
+    position = 0
+    update = False
+    cycle = 1
 
-    elif(7 in cases_player and 8 in cases_player and 7 not in combinationsTreated and checkCaseEmpty(9) == True):
-        combinationsTreated.insert(0, 7)
-        defend = 9
-    elif(8 in cases_player and 9 in cases_player and 8 not in combinationsTreated and checkCaseEmpty(7) == True):
-        combinationsTreated.insert(0, 8)
-        defend = 7   
-    elif(7 in cases_player and 9 in cases_player and 9 not in combinationsTreated and checkCaseEmpty(8) == True):
-        combinationsTreated.insert(0, 9)
-        defend = 8
+    for i in range(23):
 
-    elif(1 in cases_player and 4 in cases_player and 10 not in combinationsTreated and checkCaseEmpty(7) == True):
-        combinationsTreated.insert(0, 10)
-        defend = 7
-    elif(4 in cases_player and 7 in cases_player and 11 not in combinationsTreated and checkCaseEmpty(1) == True):
-        combinationsTreated.insert(0, 11)
-        defend = 1  
-    elif(1 in cases_player and 7 in cases_player and 12 not in combinationsTreated and checkCaseEmpty(4) == True):
-        combinationsTreated.insert(0, 12)
-        defend = 4
+        if(lower in cases_player and upper in cases_player and index not in combinationsTreated and checkCaseEmpty(result) == True):
+            combinationsTreated.insert(0, index)
+            defend = result
+            update = True
 
-    elif(2 in cases_player and 5 in cases_player and 13 not in combinationsTreated and checkCaseEmpty(8) == True):
-        combinationsTreated.insert(0, 13)
-        defend = 8
-    elif(5 in cases_player and 8 in cases_player and 14 not in combinationsTreated and checkCaseEmpty(2) == True):
-        combinationsTreated.insert(0, 14)
-        defend = 2
-    elif(2 in cases_player and 8 in cases_player and 15 not in combinationsTreated and checkCaseEmpty(5) == True):
-        combinationsTreated.insert(0, 15)
-        defend = 5
+        if cycle == 1:
+            if position == 0:
+                lower+=1
+                upper+=1
+                result-=2
+                position+=1
+            elif position == 1:
+                lower-=1
+                result+=1
+                position+=1
+            elif position == 2:
+                lower+=3
+                upper+=2
+                result+=4
+                position = 0
+        if cycle == 2:
+            if position == 0:
+                lower+=3
+                upper+=3
+                result-=6
+                position+=1
+            elif position == 1:
+                lower-=3
+                result+=3
+                position+=1
+            elif position == 2:
+                lower+=1
+                upper-=2
+                result+=4
+                position = 0
+        if cycle == 3:
+            if position == 0:
+                lower+=4
+                upper+=4
+                result-=8
+                position+=1
+            elif position == 1:
+                lower-=4
+                result+=4
+                position+=1
+            elif position == 2:
+                lower+=2
+                upper-=4
+                result+=2
+                position = 0
+        if cycle == 4:
+            if position == 0:
+                lower+=2
+                upper+=2
+                result-=4
+                position+=1
+            elif position == 1:
+                lower-=2
+                result+=2
+                position+=1
 
-    elif(3 in cases_player and 6 in cases_player and 16 not in combinationsTreated and checkCaseEmpty(9) == True):
-        combinationsTreated.insert(0, 16)
-        defend = 9
-    elif(6 in cases_player and 9 in cases_player and 17 not in combinationsTreated and checkCaseEmpty(3) == True):
-        combinationsTreated.insert(0, 17)
-        defend = 3
-    elif(3 in cases_player and 9 in cases_player and 18 not in combinationsTreated and checkCaseEmpty(6) == True):
-        combinationsTreated.insert(0, 18)
-        defend = 6
+        if i == 8:
+            lower=1
+            upper=4
+            result=7
+            position = 0
+            cycle+=1
+        elif i == 17:
+            lower=1
+            upper=5
+            result=9
+            position = 0
+            cycle+=1
+        elif i == 20:
+            cycle+=1
 
-    elif(1 in cases_player and 5 in cases_player and 19 not in combinationsTreated and checkCaseEmpty(9) == True):
-        combinationsTreated.insert(0, 19)
-        defend = 9
-    elif(5 in cases_player and 9 in cases_player and 20 not in combinationsTreated and checkCaseEmpty(1) == True):
-        combinationsTreated.insert(0, 20)
-        defend = 1
-    elif(1 in cases_player and 9 in cases_player and 21 not in combinationsTreated and checkCaseEmpty(5) == True):
-        combinationsTreated.insert(0, 21)
-        defend = 5
+        index+=1
 
-    elif(3 in cases_player and 5 in cases_player and 22 not in combinationsTreated and checkCaseEmpty(7) == True):
-        combinationsTreated.insert(0, 22)
-        defend = 7
-    elif(5 in cases_player and 7 in cases_player and 23 not in combinationsTreated and checkCaseEmpty(3) == True):
-        combinationsTreated.insert(0, 23)
-        defend = 3
-    elif(3 in cases_player and 7 in cases_player and 24 not in combinationsTreated and checkCaseEmpty(5) == True):
-        combinationsTreated.insert(0, 24)
-        defend = 5
-        
-    else:
+    if update == False:
         defend = 0
 
 

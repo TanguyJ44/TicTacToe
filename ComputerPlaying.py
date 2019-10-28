@@ -78,10 +78,6 @@ def playComputer(canvas, switchIcon, info_txt, icon_bird, icon_sheep, NW, stop_c
         canvas.coords(info_txt, 180, 619)
 
 
-
-
-
-
 def setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, msg_lose, info_txt):
     global player_play
     global cases_player
