@@ -4,6 +4,7 @@ import IconsManager as iconsmanager
 import CasesManager as casesmanager
 import ComputerPlaying as computerplaying
 import Utils as utils
+import MultiPlayer as multiplayer
 
 Frame = Tk()
 
@@ -42,7 +43,7 @@ game_mode = canvas.create_text(840,619,fill="#0A7E70",font="null 15",text="Mode 
 switchBtn = Button(Frame, anchor = W, image=image_switch, bg="#15BDAC", command=lambda: switchingIcon())
 switchBtn.configure(width=30, height=15, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
-multiBtn = Button(Frame, anchor = W, image=image_multi, bg="#15BDAC", command=lambda: switchingIcon())
+multiBtn = Button(Frame, anchor = W, image=image_multi, bg="#15BDAC", command=lambda: multiplayer.initConnection())
 multiBtn.configure(width=199, height=50, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
 utils.createSwitchButton(canvas, NW, switchBtn)
