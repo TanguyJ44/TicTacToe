@@ -8,6 +8,7 @@ entity_win = 0
 finish_game = False
 
 render_switchBtn = 0
+render_multiBtn = 0
 
 def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose) :
     global entity_win
@@ -99,7 +100,7 @@ def reloadGame(canvas, NW, switchBtn, case1, case2, case3, case4, case5, case6, 
     casesmanager.createCasesButton(canvas, NW, case1, case2, case3, case4, case5, case6, case7, case8, case9)
 
     computerplaying.start_game = False
-    render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
+    createSwitchButton(canvas, NW, switchBtn)
 
     del computerplaying.cases_player[:]
     del computerplaying.cases_computer[:]
@@ -129,3 +130,7 @@ def switchingIcon(canvas, label_player, label_computer):
 def createSwitchButton(canvas, NW, switchBtn):
     global render_switchBtn
     render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
+
+def createMultiButton(canvas, NW, multiBtn):
+    global render_multiBtn
+    render_multiBtn = canvas.create_window(715, 480, anchor=NW, window=multiBtn)
