@@ -17,14 +17,16 @@ def initConnection():
         print("Initialized connection with the server !")
         utils.updateMultiplayerLabel(2)
 
+        loop = threading.Thread(target=listeningLoop, args=(s,))
+        loop.start()
+        loop.join()
+
     except:
         print("Connection error with the server !")
         utils.updateMultiplayerLabel(0)
 
     finally:
-        loop = threading.Thread(target=listeningLoop, args=(s,))
-        loop.start()
-        loop.join()
+        pass
 
 
 def disconnect(soc):
@@ -42,8 +44,17 @@ def listeningLoop(soc):
 
         if(datas != ""):
             print("Paquet : ", datas)
+            packetAnalyzer(datas)
             datas = ""
 
 
 def sendPacket(soc, packet):
     soc.send(packet)
+
+
+def packetAnalyzer(packet):
+
+    test = "test"
+
+    if test in packet:
+        print("!!")
