@@ -3,6 +3,7 @@ import CasesManager as casesmanager
 import ComputerPlaying as computerplaying
 import PossibleCombinations as possiblecombinations
 import MultiPlayer as multiplayer
+import threading
 
 entity_win = 0
 
@@ -10,6 +11,10 @@ finish_game = False
 
 render_switchBtn = 0
 render_multiBtn = 0
+
+mp_txt = 0
+
+f_canvas = 0
 
 def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose) :
     global entity_win
@@ -138,6 +143,10 @@ def createMultiButton(canvas, NW, multiBtn):
 
 def createMultiFrame(canvas, NW, multiImage, multiBtn):
     global render_switchBtn
+    global mp_txt
+    global f_canvas
+
+    f_canvas = canvas
 
     if computerplaying.start_game == False:
 
@@ -149,5 +158,24 @@ def createMultiFrame(canvas, NW, multiImage, multiBtn):
         multiBtn.config(state="disabled")
 
         canvas.create_image(180, 130, image=multiImage, anchor=NW)
+        mp_txt = canvas.create_text(500,300,fill="white",font="null 20")
+
+        updateMultiplayerLabel(1)
 
         multiplayer.multiplayer = True
+
+        t = threading.Timer(1, multiplayer.initConnection)
+        t.start()
+
+def updateMultiplayerLabel(status):
+    global f_canvas
+    global mp_txt
+
+    if status == 0:
+        f_canvas.itemconfigure(mp_txt, text="Erreur réseau : Veuillez vérifiez votre \n             connexion internet !")
+    elif status == 1:
+        f_canvas.itemconfigure(mp_txt, text="Connexion au serveur de jeu en cours,\n       merci de bien vouloir patienter")
+    elif status == 2:
+        f_canvas.itemconfigure(mp_txt, text="Connexion au serveur réussi ! \n       En attente de joueur ...")
+    elif status == 3:
+        f_canvas.itemconfigure(mp_txt, text="La partie va pouvoir commencer !")

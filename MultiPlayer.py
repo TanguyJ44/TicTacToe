@@ -1,4 +1,6 @@
 import socket
+import Utils as utils
+import threading
 
 multiplayer = False
 
@@ -8,13 +10,40 @@ port = 1212
 
 def initConnection():
 
-    if multiplayer == False:
-
+    try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((hote, port))
-
+        
         print("Initialized connection with the server !")
+        utils.updateMultiplayerLabel(2)
 
-    else:
+    except:
+        print("Connection error with the server !")
+        utils.updateMultiplayerLabel(0)
 
-        print("Client already initialized with the server !")
+    finally:
+        loop = threading.Thread(target=listeningLoop, args=(s,))
+        loop.start()
+        loop.join()
+
+
+def disconnect(soc):
+    soc.close()
+
+
+def listeningLoop(soc):
+
+    print("func")
+
+    datas = ""
+
+    while 1:
+        datas = soc.recv(4096)
+
+        if(datas != ""):
+            print("Paquet : ", datas)
+            datas = ""
+
+
+def sendPacket(soc, packet):
+    soc.send(packet)
