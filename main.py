@@ -23,6 +23,7 @@ image_path_msg_lose = os.path.join(base_folder, 'imgs/msg_lose.png')
 image_path_msg_draw = os.path.join(base_folder, 'imgs/msg_draw.png')
 image_path_switch = os.path.join(base_folder, 'imgs/switch.png')
 image_path_multi = os.path.join(base_folder, 'imgs/multi_btn.png')
+image_path_frame_multi = os.path.join(base_folder, 'imgs/mp_stats.png')
 
 photo = PhotoImage(file=image_path_bg)
 icon_sheep = PhotoImage(file = image_path_sheep)
@@ -32,6 +33,7 @@ msg_lose = PhotoImage(file = image_path_msg_lose)
 msg_draw = PhotoImage(file = image_path_msg_draw)
 image_switch = PhotoImage(file = image_path_switch)
 image_multi = PhotoImage(file = image_path_multi)
+image_frame_multi = PhotoImage(file = image_path_frame_multi)
 
 canvas.create_image(0, 0, image=photo, anchor=NW)
 label_player = canvas.create_text(850,260,fill="black",font="null 20",text="Votre Pion")
@@ -43,7 +45,7 @@ game_mode = canvas.create_text(840,619,fill="#0A7E70",font="null 15",text="Mode 
 switchBtn = Button(Frame, anchor = W, image=image_switch, bg="#15BDAC", command=lambda: switchingIcon())
 switchBtn.configure(width=30, height=15, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
-multiBtn = Button(Frame, anchor = W, image=image_multi, bg="#15BDAC", command=lambda: multiplayer.initConnection())
+multiBtn = Button(Frame, anchor = W, image=image_multi, bg="#15BDAC", command=lambda: utils.createMultiFrame(canvas, NW, image_frame_multi, multiBtn))
 multiBtn.configure(width=199, height=50, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
 utils.createSwitchButton(canvas, NW, switchBtn)
@@ -89,7 +91,12 @@ def mouseClickLeftButton(event):
         utils.reloadGame(canvas, NW, switchBtn, case1, case2, case3, case4, case5, case6, case7, case8, case9)
         utils.finish_game = False
 
+def keyEscapePressed(event):
+    if multiplayer.multiplayer == True:
+        print("Action !")
+
 
 Frame.bind("<Button-1>", mouseClickLeftButton)
+Frame.bind('<Escape>', keyEscapePressed)
 
 Frame.mainloop()

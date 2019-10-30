@@ -2,6 +2,7 @@ import IconsManager as iconsmanager
 import CasesManager as casesmanager
 import ComputerPlaying as computerplaying
 import PossibleCombinations as possiblecombinations
+import MultiPlayer as multiplayer
 
 entity_win = 0
 
@@ -134,3 +135,19 @@ def createSwitchButton(canvas, NW, switchBtn):
 def createMultiButton(canvas, NW, multiBtn):
     global render_multiBtn
     render_multiBtn = canvas.create_window(715, 480, anchor=NW, window=multiBtn)
+
+def createMultiFrame(canvas, NW, multiImage, multiBtn):
+    global render_switchBtn
+
+    if computerplaying.start_game == False:
+
+        for i in range(9):
+            casesmanager.deleteCase(canvas, i+1)
+
+        canvas.delete(render_switchBtn)
+
+        multiBtn.config(state="disabled")
+
+        canvas.create_image(180, 130, image=multiImage, anchor=NW)
+
+        multiplayer.multiplayer = True
