@@ -15,6 +15,7 @@ render_multiBtn = 0
 mp_txt = 0
 
 f_canvas = 0
+f_NW = 0
 
 def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose) :
     global entity_win
@@ -141,12 +142,21 @@ def createMultiButton(canvas, NW, multiBtn):
     global render_multiBtn
     render_multiBtn = canvas.create_window(715, 480, anchor=NW, window=multiBtn)
 
+f_multiImage = 0
+f_multiBtn = 0
+
 def createMultiFrame(canvas, NW, multiImage, multiBtn):
     global render_switchBtn
     global mp_txt
     global f_canvas
+    global f_NW
+    global f_multiImage
+    global f_multiBtn
 
     f_canvas = canvas
+    f_NW = NW
+    f_multiImage = multiImage
+    f_multiBtn = multiBtn
 
     if computerplaying.start_game == False:
 
@@ -179,3 +189,5 @@ def updateMultiplayerLabel(status):
         f_canvas.itemconfigure(mp_txt, text="Connexion au serveur réussi ! \n       En attente de joueur ...")
     elif status == 3:
         f_canvas.itemconfigure(mp_txt, text="La partie va pouvoir commencer !")
+    elif status == 4:
+        f_canvas.itemconfigure(mp_txt, text="Le joueur adverse c'est déconnecté !")
