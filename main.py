@@ -71,7 +71,7 @@ case7.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT
 case8.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 case9.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
-utils.init(icon_bird, icon_sheep, switchBtn, label_player, label_computer, case1, case2, case3, case4, case5, case6, case7, case8, case9)
+utils.init(icon_bird, icon_sheep, switchBtn, label_player, label_computer, case1, case2, case3, case4, case5, case6, case7, case8, case9, game_mode, info_txt)
 
 def createCasesButton():
     casesmanager.createCasesButton(canvas, NW, case1, case2, case3, case4, case5, case6, case7, case8, case9)
@@ -95,12 +95,13 @@ def mouseClickLeftButton(event):
 def keyEscapePressed(event):
     if multiplayer.multiplayer == True:
         data = "quit"
-        multiplayer.sendPacket(data.encode)
+        multiplayer.sendPacket(data)
 
     if multiplayer.quitMP == True:
         # close frame MP
         utils.reloadGame(canvas, NW, switchBtn)
         multiplayer.quitMP = False
+        utils.switchGameMode()
 
 
 

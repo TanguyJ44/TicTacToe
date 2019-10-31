@@ -80,14 +80,15 @@ def packetAnalyzer(packet):
     
     if "case" in packet:
         case = packet[4:]
+        case = case[:1]
 
         print(case)
 
-        casesmanager.deleteCase(utils.f_canvas, case)
+        casesmanager.deleteCase(utils.f_canvas, int(case))
         if main_player == True:
-            iconsmanager.setIcon(utils.f_canvas, 1, case, utils.icon_bird, utils.icon_sheep, utils.f_NW)
+            iconsmanager.setIcon(utils.f_canvas, 0, int(case), utils.icon_bird, utils.icon_sheep, utils.f_NW)
         else:
-            iconsmanager.setIcon(utils.f_canvas, 0, case, utils.icon_bird, utils.icon_sheep, utils.f_NW)
+            iconsmanager.setIcon(utils.f_canvas, 1, int(case), utils.icon_bird, utils.icon_sheep, utils.f_NW)
 
         utils.f_canvas.itemconfigure(utils.info_txt, text="C'est à vous de jouer !")
         utils.f_canvas.coords(utils.info_txt, 180, 619)
@@ -119,6 +120,8 @@ def packetAnalyzer(packet):
             utils.switchingIcon(utils.f_canvas, utils.label_player, utils.label_computer)
         elif main_player == False and computerplaying.switchIcon == False:
             utils.switchingIcon(utils.f_canvas, utils.label_player, utils.label_computer)
+
+        utils.switchGameMode()
 
         computerplaying.start_game = True
         computerplaying.stop_computer_playing = 1

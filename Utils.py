@@ -26,6 +26,9 @@ info_txt = 0
 label_player = 0
 label_computer = 0
 
+game_mode = 0
+mode = 0
+
 case1 = 0
 case2 = 0
 case3 = 0
@@ -36,13 +39,15 @@ case7 = 0
 case8 = 0
 case9 = 0
 
-def init(ic_bird, ic_sheep, swBtn, lb_player, lb_computer, c1, c2, c3, c4, c5, c6, c7, c8, c9):
+def init(ic_bird, ic_sheep, swBtn, lb_player, lb_computer, c1, c2, c3, c4, c5, c6, c7, c8, c9, g_mode, label_txt):
     global icon_bird
     global icon_sheep
     global switchBtn
+    global info_txt
     global label_player
     global label_computer
     global case1, case2, case3, case4, case5, case6, case7, case8, case9
+    global game_mode
 
     icon_bird = ic_bird
     icon_sheep = ic_sheep
@@ -50,6 +55,8 @@ def init(ic_bird, ic_sheep, swBtn, lb_player, lb_computer, c1, c2, c3, c4, c5, c
     label_computer = lb_computer
 
     switchBtn = swBtn
+    info_txt = label_txt
+    game_mode = g_mode
 
     case1 = c1
     case2 = c2
@@ -236,3 +243,15 @@ def updateMultiplayerLabel(status):
         f_canvas.itemconfigure(mp_txt, text="La partie va pouvoir commencer !")
     elif status == 4:
         f_canvas.itemconfigure(mp_txt, text="Le joueur adverse c'est déconnecté !")
+
+
+def switchGameMode():
+    global mode
+    global game_mode
+    global f_canvas
+
+    if mode == 0:
+        f_canvas.itemconfigure(game_mode, text="Mode de jeu : Multijoueur")
+        mode = 1
+    elif mode == 1:
+        f_canvas.itemconfigure(game_mode, text="Mode de jeu : Joueur VS Bot")
