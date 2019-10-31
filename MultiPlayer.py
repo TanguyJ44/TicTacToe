@@ -6,6 +6,7 @@ import CasesManager as casesmanager
 import IconsManager as iconsmanager
 
 multiplayer = False
+quitMP = True
 
 #hote = "217.182.67.57"
 hote = "192.168.1.23"
@@ -17,6 +18,7 @@ main_player = False
 
 def initConnection():
     global global_soc
+    global quitMP
 
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -26,6 +28,8 @@ def initConnection():
         
         print("Initialized connection with the server !")
         utils.updateMultiplayerLabel(2)
+
+        quitMP = False
 
         loop = threading.Thread(target=listeningLoop, args=(s,))
         loop.start()
@@ -41,6 +45,11 @@ def initConnection():
 
 def disconnect():
     global global_soc
+    global quitMP
+    global multiplayer
+
+    quitMP = True
+    multiplayer = False
     global_soc.close()
 
 
@@ -72,6 +81,8 @@ def packetAnalyzer(packet):
     if "case" in packet:
         case = packet[4:]
 
+        print(case)
+
         casesmanager.deleteCase(utils.f_canvas, case)
         if main_player == True:
             iconsmanager.setIcon(utils.f_canvas, 1, case, utils.icon_bird, utils.icon_sheep, utils.f_NW)
@@ -87,10 +98,12 @@ def packetAnalyzer(packet):
         if "1" in packet:
             main_player = True
             computerplaying.player_play = 1
+            print("wait 1")
         else:
             main_player = False
             computerplaying.player_play = 0
             utils.updateMultiplayerLabel(3)
+            print("wait 2")
 
     elif "newplayer" in packet:
         utils.updateMultiplayerLabel(3)
@@ -98,9 +111,9 @@ def packetAnalyzer(packet):
     elif "start" in packet:
         
         utils.f_canvas.delete(utils.mpFrame)
-        utils.f_canvas.delete(utils.info_txt)
+        utils.f_canvas.delete(utils.mp_txt)
 
-        utils.reloadGame(utils.f_canvas, utils.f_NW, 0)
+        utils.reloadGame(utils.f_canvas, utils.f_NW, utils.switchBtn)
 
         if main_player == True and computerplaying.switchIcon == True:
             utils.switchingIcon(utils.f_canvas, utils.label_player, utils.label_computer)
@@ -113,4 +126,4 @@ def packetAnalyzer(packet):
     elif "quit" in packet:
         disconnect()
         utils.createMultiFrame(utils.f_canvas, utils.f_NW, utils.f_multiImage, utils.f_multiBtn)
-        utils.updateMultiplayerLabel(2)
+        utils.updateMultiplayerLabel(4)

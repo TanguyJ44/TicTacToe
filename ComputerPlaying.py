@@ -82,6 +82,8 @@ def setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, ms
         if multiplayer.multiplayer == True:
             canvas.itemconfigure(info_txt, text="C'est à l'Adversaire de jouer ...")
             canvas.coords(info_txt, 215, 619)
-            data = "case"+caseId
-            multiplayer.sendPacket(data.encode)
+            data = "case"
+            data += str(caseId)
+            print(data)
+            multiplayer.sendPacket(data)
 

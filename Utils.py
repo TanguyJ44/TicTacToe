@@ -12,6 +12,8 @@ finish_game = False
 render_switchBtn = 0
 render_multiBtn = 0
 
+switchBtn = 0
+
 mpFrame = 0
 mp_txt = 0
 
@@ -34,19 +36,20 @@ case7 = 0
 case8 = 0
 case9 = 0
 
-def init(ic_bird, ic_sheep, label_txt, lb_player, lb_computer, c1, c2, c3, c4, c5, c6, c7, c8, c9):
+def init(ic_bird, ic_sheep, swBtn, lb_player, lb_computer, c1, c2, c3, c4, c5, c6, c7, c8, c9):
     global icon_bird
     global icon_sheep
-    global info_txt
+    global switchBtn
     global label_player
     global label_computer
     global case1, case2, case3, case4, case5, case6, case7, case8, case9
 
     icon_bird = ic_bird
     icon_sheep = ic_sheep
-    label_txt = info_txt
     label_player = lb_player
     label_computer = lb_computer
+
+    switchBtn = swBtn
 
     case1 = c1
     case2 = c2
