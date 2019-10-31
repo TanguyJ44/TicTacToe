@@ -12,10 +12,51 @@ finish_game = False
 render_switchBtn = 0
 render_multiBtn = 0
 
+mpFrame = 0
 mp_txt = 0
 
 f_canvas = 0
 f_NW = 0
+
+icon_bird = 0
+icon_sheep = 0
+info_txt = 0
+label_player = 0
+label_computer = 0
+
+case1 = 0
+case2 = 0
+case3 = 0
+case4 = 0
+case5 = 0
+case6 = 0
+case7 = 0
+case8 = 0
+case9 = 0
+
+def init(ic_bird, ic_sheep, label_txt, lb_player, lb_computer, c1, c2, c3, c4, c5, c6, c7, c8, c9):
+    global icon_bird
+    global icon_sheep
+    global info_txt
+    global label_player
+    global label_computer
+    global case1, case2, case3, case4, case5, case6, case7, case8, case9
+
+    icon_bird = ic_bird
+    icon_sheep = ic_sheep
+    label_txt = info_txt
+    label_player = lb_player
+    label_computer = lb_computer
+
+    case1 = c1
+    case2 = c2
+    case3 = c3
+    case4 = c4
+    case5 = c5
+    case6 = c6
+    case7 = c7
+    case8 = c8
+    case9 = c9
 
 def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose) :
     global entity_win
@@ -96,7 +137,7 @@ def printGameMsg(canvas, NW, gameStat, msg_draw, msg_win, msg_lose):
     finish_game = True
 
 
-def reloadGame(canvas, NW, switchBtn, case1, case2, case3, case4, case5, case6, case7, case8, case9):
+def reloadGame(canvas, NW, switchBtn):
     global image_msg_delete
     global entity_win
     global image_msg_delete
@@ -152,6 +193,7 @@ def createMultiFrame(canvas, NW, multiImage, multiBtn):
     global f_NW
     global f_multiImage
     global f_multiBtn
+    global mpFrame
 
     f_canvas = canvas
     f_NW = NW
@@ -167,7 +209,7 @@ def createMultiFrame(canvas, NW, multiImage, multiBtn):
 
         multiBtn.config(state="disabled")
 
-        canvas.create_image(180, 130, image=multiImage, anchor=NW)
+        mpFrame = canvas.create_image(180, 130, image=multiImage, anchor=NW)
         mp_txt = canvas.create_text(500,300,fill="white",font="null 20")
 
         updateMultiplayerLabel(1)

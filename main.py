@@ -71,6 +71,7 @@ case7.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT
 case8.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 case9.configure(width=21, height=10, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
+utils.init(icon_bird, icon_sheep, info_txt, label_player, label_computer, case1, case2, case3, case4, case5, case6, case7, case8, case9)
 
 def createCasesButton():
     casesmanager.createCasesButton(canvas, NW, case1, case2, case3, case4, case5, case6, case7, case8, case9)
@@ -88,7 +89,7 @@ def setCaseIcon(caseId):
 
 def mouseClickLeftButton(event):
     if utils.finish_game == True:
-        utils.reloadGame(canvas, NW, switchBtn, case1, case2, case3, case4, case5, case6, case7, case8, case9)
+        utils.reloadGame(canvas, NW, switchBtn)
         utils.finish_game = False
 
 def keyEscapePressed(event):

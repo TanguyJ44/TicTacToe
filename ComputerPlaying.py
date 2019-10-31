@@ -4,6 +4,7 @@ import CasesManager as casesmanager
 import Utils as utils
 import PossibleCombinations as possiblecombinations
 import threading
+import MultiPlayer as multiplayer
 
 start_game = False
 
@@ -70,11 +71,17 @@ def setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, ms
         else:
             iconsmanager.setIcon(canvas, 0, caseId, icon_bird, icon_sheep, NW)
         player_play = 0
-        cases_player.insert(0, caseId)
-        utils.verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose)
+        if multiplayer.multiplayer == False:
+            cases_player.insert(0, caseId)
+            utils.verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose)
         if stop_computer_playing == 0:
             canvas.itemconfigure(info_txt, text="C'est à l'Ordinateur de jouer ...")
             canvas.coords(info_txt, 215, 619)
             t = threading.Timer(0.8, playComputer, [canvas, switchIcon, info_txt, icon_bird, icon_sheep, NW, stop_computer_playing,msg_draw, msg_win, msg_lose])
             t.start()
+        if multiplayer.multiplayer == True:
+            canvas.itemconfigure(info_txt, text="C'est à l'Adversaire de jouer ...")
+            canvas.coords(info_txt, 215, 619)
+            data = "case"+caseId
+            multiplayer.sendPacket(data.encode)
 
