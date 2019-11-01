@@ -243,6 +243,12 @@ def updateMultiplayerLabel(status):
         f_canvas.itemconfigure(mp_txt, text="La partie va pouvoir commencer !")
     elif status == 4:
         f_canvas.itemconfigure(mp_txt, text="Le joueur adverse c'est déconnecté !")
+    elif status == 5:
+        f_canvas.itemconfigure(mp_txt, text="Vous remportez la partie !")
+    elif status == 6:
+        f_canvas.itemconfigure(mp_txt, text="Vous perdez la partie !")
+    elif status == 7:
+        f_canvas.itemconfigure(mp_txt, text="Match Nul !")
 
 
 def switchGameMode():

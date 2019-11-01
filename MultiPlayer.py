@@ -75,6 +75,7 @@ def sendPacket(packet):
 
 def packetAnalyzer(packet):
     global main_player 
+    global quitMP
 
     packet = packet.decode()
     
@@ -125,6 +126,18 @@ def packetAnalyzer(packet):
 
         computerplaying.start_game = True
         computerplaying.stop_computer_playing = 1
+
+    elif "gamestat" in packet:
+        utils.createMultiFrame(utils.f_canvas, utils.f_NW, utils.f_multiImage, utils.f_multiBtn)
+        if "0" in packet:
+            utils.updateMultiplayerLabel(6)
+        elif "1" in packet:
+            utils.updateMultiplayerLabel(5)
+        elif "2" in packet:
+            utils.updateMultiplayerLabel(7)
+
+        disconnect()
+        quitMP = True
 
     elif "quit" in packet:
         disconnect()
