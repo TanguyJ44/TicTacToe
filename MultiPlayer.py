@@ -105,6 +105,8 @@ def packetAnalyzer(packet):
             main_player = False
             computerplaying.player_play = 0
             utils.updateMultiplayerLabel(3)
+            utils.f_canvas.itemconfigure(utils.info_txt, text="C'est à l'Adversaire de jouer !")
+            utils.f_canvas.coords(utils.info_txt, 215, 619)
             print("wait 2")
 
     elif "newplayer" in packet:
@@ -123,6 +125,9 @@ def packetAnalyzer(packet):
             utils.switchingIcon(utils.f_canvas, utils.label_player, utils.label_computer)
 
         utils.switchGameMode()
+
+        if main_player == False:
+            computerplaying.player_play = 0
 
         computerplaying.start_game = True
         computerplaying.stop_computer_playing = 1
