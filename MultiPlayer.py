@@ -16,9 +16,13 @@ global_soc = 0
 
 main_player = False
 
+loop = 0
+run = 1
+
 def initConnection():
     global global_soc
     global quitMP
+    global loop
 
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -54,12 +58,13 @@ def disconnect():
 
 
 def listeningLoop(soc):
+    global run
 
     print("func")
 
     datas = ""
 
-    while 1:
+    while run:
         datas = soc.recv(4096)
 
         if(datas != ""):
@@ -76,6 +81,8 @@ def sendPacket(packet):
 def packetAnalyzer(packet):
     global main_player 
     global quitMP
+    global loop
+    global run
 
     packet = packet.decode()
     
@@ -133,7 +140,16 @@ def packetAnalyzer(packet):
         computerplaying.stop_computer_playing = 1
 
     elif "gamestat" in packet:
-        utils.createMultiFrame(utils.f_canvas, utils.f_NW, utils.f_multiImage, utils.f_multiBtn)
+        loop = threading.currentThread()
+        run = 0
+
+        disconnect()
+        quitMP = True
+
+        computerplaying.start_game = False
+
+        utils.createMultiFrame(utils.f_canvas, utils.f_NW, utils.f_multiImage, utils.f_multiBtn, 0)
+
         if "0" in packet:
             utils.updateMultiplayerLabel(6)
         elif "1" in packet:
@@ -141,10 +157,7 @@ def packetAnalyzer(packet):
         elif "2" in packet:
             utils.updateMultiplayerLabel(7)
 
-        disconnect()
-        quitMP = True
-
     elif "quit" in packet:
         disconnect()
-        utils.createMultiFrame(utils.f_canvas, utils.f_NW, utils.f_multiImage, utils.f_multiBtn)
+        utils.createMultiFrame(utils.f_canvas, utils.f_NW, utils.f_multiImage, utils.f_multiBtn, 0)
         utils.updateMultiplayerLabel(4)

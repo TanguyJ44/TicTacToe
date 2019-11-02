@@ -5,6 +5,7 @@ import CasesManager as casesmanager
 import ComputerPlaying as computerplaying
 import Utils as utils
 import MultiPlayer as multiplayer
+import sys
 
 Frame = Tk()
 
@@ -45,7 +46,7 @@ game_mode = canvas.create_text(840,619,fill="#0A7E70",font="null 15",text="Mode 
 switchBtn = Button(Frame, anchor = W, image=image_switch, bg="#15BDAC", command=lambda: switchingIcon())
 switchBtn.configure(width=30, height=15, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
-multiBtn = Button(Frame, anchor = W, image=image_multi, bg="#15BDAC", command=lambda: utils.createMultiFrame(canvas, NW, image_frame_multi, multiBtn))
+multiBtn = Button(Frame, anchor = W, image=image_multi, bg="#15BDAC", command=lambda: utils.createMultiFrame(canvas, NW, image_frame_multi, multiBtn, 1))
 multiBtn.configure(width=199, height=50, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
 utils.createSwitchButton(canvas, NW, switchBtn)
@@ -96,12 +97,18 @@ def keyEscapePressed(event):
     if multiplayer.multiplayer == True:
         data = "quit"
         multiplayer.sendPacket(data)
+        multiplayer.quitMP = True
+        sys.exit(0)
 
     if multiplayer.quitMP == True:
-        # close frame MP
+        canvas.delete(utils.mpFrame)
+        canvas.delete(utils.mp_txt)
         utils.reloadGame(canvas, NW, switchBtn)
         multiplayer.quitMP = False
         utils.switchGameMode()
+        multiBtn.config(state="active")
+        canvas.itemconfigure(info_txt, text="C'est à vous de jouer !")
+        canvas.coords(info_txt, 180, 619)
 
 
 

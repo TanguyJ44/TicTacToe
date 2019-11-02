@@ -196,7 +196,7 @@ def createMultiButton(canvas, NW, multiBtn):
 f_multiImage = 0
 f_multiBtn = 0
 
-def createMultiFrame(canvas, NW, multiImage, multiBtn):
+def createMultiFrame(canvas, NW, multiImage, multiBtn, init):
     global render_switchBtn
     global mp_txt
     global f_canvas
@@ -224,10 +224,11 @@ def createMultiFrame(canvas, NW, multiImage, multiBtn):
 
         updateMultiplayerLabel(1)
 
-        multiplayer.multiplayer = True
+        if init == 1:
+            multiplayer.multiplayer = True
 
-        t = threading.Timer(1, multiplayer.initConnection)
-        t.start()
+            t = threading.Timer(1, multiplayer.initConnection)
+            t.start()
 
 def updateMultiplayerLabel(status):
     global f_canvas
