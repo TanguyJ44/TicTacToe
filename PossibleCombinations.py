@@ -1,3 +1,10 @@
+# Ce module permet à l'ordinateur de jouer en respectant une démarche de réflexion.
+# Cela évite à l'ordinateur de jouer ses pions aléatoirement. Dans ce module,
+# l'ordinateur prend une décision parmis les choix suivants :
+# Soit l'ordinateur ce défend pour éviter que le joueur gagne, soit il décide d'attaquer.
+# Cette décision est prise en fonction de l'analyse du plateau de jeu réalisé en amont de
+# la prise de désision.
+
 from random import randint
 
 combinationsTreated = []
@@ -9,6 +16,8 @@ cases_computer = []
 defend = 0
 attack = 0
 
+# Cette fonction permet à l'ordinateur d'analyser le jeu actuel
+# En fonction de l'état d'avancement du jeu, il prendra une désision
 def calcCombinations(c_player, c_computer):
     global combinationsTreated
     global computerAttackTreated
@@ -19,12 +28,15 @@ def calcCombinations(c_player, c_computer):
     cases_player = c_player
     cases_computer = c_computer
 
+    # Analyse du jeu en mode défence
     computerDefend(c_player)
+    # Analyse du jeu en mode attaque
     computerAttack(c_computer)
 
     print(defend)
     print(attack)
 
+    # En fonction de l'analyse, l'ordinateur prend la désision la plus approprié
     if(defend > 0 and attack == 0):
         return defend
     elif(attack > 0 and defend == 0):
@@ -37,6 +49,7 @@ def calcCombinations(c_player, c_computer):
                 return i
 
 
+# Analyse du jeu en mode défence
 def computerDefend(cases_player):
     global combinationsTreated
     global defend
@@ -133,7 +146,7 @@ def computerDefend(cases_player):
     if update == False:
         defend = 0
 
-
+# Analyse du jeu en mode attaque
 def computerAttack(cases_computer):
     global computerAttackTreated
     global attack
@@ -230,7 +243,7 @@ def computerAttack(cases_computer):
     if update == False:
         attack = 0
 
-
+# Vérifie si la case demandé est vide ou non
 def checkCaseEmpty(caseNumber):
     if(caseNumber not in cases_player and caseNumber not in cases_computer):
         return True

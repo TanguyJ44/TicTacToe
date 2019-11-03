@@ -8,6 +8,7 @@ case7_render = 0
 case8_render = 0
 case9_render = 0
 
+# Fonction permettant de créer les 9 cases de jeu sur le plateau
 def createCasesButton(canvas, NW, case1, case2, case3, case4, case5, case6, case7, case8, case9):
     global case1_render
     global case2_render
@@ -29,6 +30,7 @@ def createCasesButton(canvas, NW, case1, case2, case3, case4, case5, case6, case
     case8_render = canvas.create_window(213, 413, anchor=NW, window=case8)
     case9_render = canvas.create_window(389, 413, anchor=NW, window=case9)
 
+# Fonction permettant de supprimer une case précise du plateau
 def deleteCase(canvas, caseId):
     if caseId == 1:
         canvas.delete(case1_render)

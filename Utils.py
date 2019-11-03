@@ -5,30 +5,40 @@ import PossibleCombinations as possiblecombinations
 import MultiPlayer as multiplayer
 import threading
 
+# Défini qui remporte la partie
+# 0 = match nul, 1 = joueur gagne, 2 = ordinateur gagne (ou joueur adverse dans le cas d'une partie multijoueur)
 entity_win = 0
 
+# Défini la partie comme terminée
 finish_game = False
 
+# Initialisation des variables de rendu des composants
 render_switchBtn = 0
 render_multiBtn = 0
 
+# Initialisation de l'état du bouton de changement de pion
 switchBtn = 0
 
+# Initialisation du menu multijoueur
 mpFrame = 0
 mp_txt = 0
 
+# Création d'une instance canvas et NW
 f_canvas = 0
 f_NW = 0
 
+# Initialisation des icons et composants de textes
 icon_bird = 0
 icon_sheep = 0
 info_txt = 0
 label_player = 0
 label_computer = 0
 
+# Initialisation du mode de jeu (joueur vs bot ou multijoueur)
 game_mode = 0
 mode = 0
 
+# Initialisation des 9 cases du plateau
 case1 = 0
 case2 = 0
 case3 = 0
@@ -39,6 +49,7 @@ case7 = 0
 case8 = 0
 case9 = 0
 
+# Fonction d'initialisation de toutes les variables ci-dessus afin de leur affecter une donnée
 def init(ic_bird, ic_sheep, swBtn, lb_player, lb_computer, c1, c2, c3, c4, c5, c6, c7, c8, c9, g_mode, label_txt):
     global icon_bird
     global icon_sheep
@@ -68,9 +79,11 @@ def init(ic_bird, ic_sheep, swBtn, lb_player, lb_computer, c1, c2, c3, c4, c5, c
     case8 = c8
     case9 = c9
 
+# Fonction permetant de détecter un gagnant, un perdant ou un match nul
 def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_lose) :
     global entity_win
 
+    # Vérification du jeu du joueur
     if(1 in cases_player and 2 in cases_player and 3 in cases_player):
         entity_win = 1
     if(4 in cases_player and 5 in cases_player and 6 in cases_player):
@@ -88,6 +101,7 @@ def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_l
     if(3 in cases_player and 5 in cases_player and 7 in cases_player):
         entity_win = 1
 
+    # Vérification du jeu de l'ordinateur
     if(1 in cases_computer and 2 in cases_computer and 3 in cases_computer):
         entity_win = 2
     if(4 in cases_computer and 5 in cases_computer and 6 in cases_computer):
@@ -105,16 +119,20 @@ def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_l
     if(3 in cases_computer and 5 in cases_computer and 7 in cases_computer):
         entity_win = 2
 
+    # Si le joueur gagne, la condition est vérifié
     if entity_win == 1:
         print("Joueur gagne !")
         computerplaying.stop_computer_playing = 1
         printGameMsg(canvas, NW, 1, msg_draw, msg_win, msg_lose)
+
+    # Si l'ordinateur gagne, la condition est vérifié
     if entity_win == 2:  
         print("Ordinateur gagne !")  
         computerplaying.stop_computer_playing = 1
         printGameMsg(canvas, NW, 2, msg_draw, msg_win, msg_lose)
 
     cases_total = len(cases_player) + len(cases_computer)
+    # Si match nul, la condition est vérifié
     if(cases_total == 9 and entity_win == 0):
         print("Match nul !")
         computerplaying.stop_computer_playing = 1
@@ -123,17 +141,21 @@ def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_l
 
 image_msg_delete = 0
 
+# Fonction d'affichage du message de fin de partie
 # 0 = match nul | 1 = joueur gagne | 2 = ordinateur gagne
 def printGameMsg(canvas, NW, gameStat, msg_draw, msg_win, msg_lose):
     global finish_game
     global image_msg_delete
     global render_switchBtn
 
+    # Suppression des 9 cases du plateau pour laisser la place au message de fin de partie
     for i in range(9):
         casesmanager.deleteCase(canvas, i+1)
 
+    # Suppression du bouton d'échange de pion
     canvas.delete(render_switchBtn)
 
+    # Affichage du message approprié
     if gameStat == 0:
         image_draw = canvas.create_image(180, 130, image=msg_draw, anchor=NW)
         image_msg_delete = image_draw
@@ -144,36 +166,42 @@ def printGameMsg(canvas, NW, gameStat, msg_draw, msg_win, msg_lose):
         image_lose = canvas.create_image(180, 130, image=msg_lose, anchor=NW)
         image_msg_delete = image_lose
 
+    # Définir la fin de la partie
     finish_game = True
 
-
+# Fonction permettant de remettre le jeu à zero pour une nouvelle partie
 def reloadGame(canvas, NW, switchBtn):
     global image_msg_delete
     global entity_win
     global image_msg_delete
     global render_switchBtn
 
+    # Suppression des composants de fin de partie
     canvas.delete(image_msg_delete)
     iconsmanager.deleteIcons(canvas)
     casesmanager.createCasesButton(canvas, NW, case1, case2, case3, case4, case5, case6, case7, case8, case9)
 
+    # Restauration du bouton d'échange d'icon
     computerplaying.start_game = False
     createSwitchButton(canvas, NW, switchBtn)
 
+    # Suppression des tableaux de stockage de donnée
     del computerplaying.cases_player[:]
     del computerplaying.cases_computer[:]
     del possiblecombinations.combinationsTreated[:]
     del possiblecombinations.computerAttackTreated[:]
 
+    # Réinitialisation des variables de jeu de l'ordinateur
     possiblecombinations.defend = 0
     possiblecombinations.attack = 0
 
+    # Réinitialisation des variables de jeu
     computerplaying.player_play = 1
     entity_win = 0
     image_msg_delete = 0
     computerplaying.stop_computer_playing = 0
 
-
+# Fonction permettant l'échange d'icon
 def switchingIcon(canvas, label_player, label_computer):
     if computerplaying.switchIcon == False and computerplaying.start_game == False:
         canvas.itemconfigure(label_player, text="Ordinateur")
@@ -184,11 +212,12 @@ def switchingIcon(canvas, label_player, label_computer):
         canvas.itemconfigure(label_computer, text="Ordinateur")
         computerplaying.switchIcon = False
 
-
+# Fonction permettant de créer le bouton d'échange d'icon sur le canvas
 def createSwitchButton(canvas, NW, switchBtn):
     global render_switchBtn
     render_switchBtn = canvas.create_window(800, 310, anchor=NW, window=switchBtn)
 
+# Fonction permettant de créer le bouton multijoueur sur le canvas
 def createMultiButton(canvas, NW, multiBtn):
     global render_multiBtn
     render_multiBtn = canvas.create_window(715, 480, anchor=NW, window=multiBtn)
@@ -196,6 +225,7 @@ def createMultiButton(canvas, NW, multiBtn):
 f_multiImage = 0
 f_multiBtn = 0
 
+# Fonction permettant de créer le menu de connexion multijoueur
 def createMultiFrame(canvas, NW, multiImage, multiBtn, init):
     global render_switchBtn
     global mp_txt
@@ -230,6 +260,7 @@ def createMultiFrame(canvas, NW, multiImage, multiBtn, init):
             t = threading.Timer(1, multiplayer.initConnection)
             t.start()
 
+# Fonction permettant d'informer le joueur sur le jeu en temps réel (lors d'une partie multijoueur)
 def updateMultiplayerLabel(status):
     global f_canvas
     global mp_txt
@@ -251,7 +282,7 @@ def updateMultiplayerLabel(status):
     elif status == 7:
         f_canvas.itemconfigure(mp_txt, text="Match Nul !")
 
-
+# Informer me joueur sur le mode de jeu
 def switchGameMode():
     global mode
     global game_mode

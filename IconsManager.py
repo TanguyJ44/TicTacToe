@@ -18,7 +18,7 @@ icon_sheep7_render = 0
 icon_sheep8_render = 0
 icon_sheep9_render = 0
 
-
+# Fonction permettant d'ajouter un pion sur le plateau
 def setIcon(canvas, iconType, caseId, icon_bird, icon_sheep, NW):
     global icon_bird1_render
     global icon_bird2_render
@@ -80,7 +80,7 @@ def setIcon(canvas, iconType, caseId, icon_bird, icon_sheep, NW):
         if caseId == 9:
             icon_sheep9_render = canvas.create_image(420,440,image=icon_sheep,anchor=NW)
 
-
+# Fonction permettant de supprimer un pion sur le plateau
 def deleteIcons(canvas):
     global icon_bird1_render
     global icon_bird2_render

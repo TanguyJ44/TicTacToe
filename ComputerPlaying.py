@@ -17,7 +17,7 @@ stop_computer_playing = 0
 
 switchIcon = False
 
-
+# Fonction permettant à l'ordinateur de joueur et d'intéragire sur le plateau 
 def playComputer(canvas, switchIcon, info_txt, icon_bird, icon_sheep, NW, stop_computer_playing,msg_draw, msg_win, msg_lose):
     global player_play
     global cases_computer
@@ -55,7 +55,7 @@ def playComputer(canvas, switchIcon, info_txt, icon_bird, icon_sheep, NW, stop_c
         canvas.itemconfigure(info_txt, text="C'est à vous de jouer !")
         canvas.coords(info_txt, 180, 619)
 
-
+# Fonction permettant au joueur de placer son pion en fonction du jeu de l'ordinateur
 def setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, msg_lose, info_txt):
     global player_play
     global cases_player
