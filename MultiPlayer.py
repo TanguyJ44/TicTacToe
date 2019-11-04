@@ -29,6 +29,7 @@ def initConnection():
     global global_soc
     global quitMP
     global loop
+    global run
 
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -40,6 +41,7 @@ def initConnection():
         utils.updateMultiplayerLabel(2)
 
         quitMP = False
+        run = 1
 
         loop = threading.Thread(target=listeningLoop, args=(s,))
         loop.start()
