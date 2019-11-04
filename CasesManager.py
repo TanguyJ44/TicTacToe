@@ -1,3 +1,8 @@
+# Il s'agit du module de gestion des cases du plateau (9 au total). 
+# Depuis ce module, il est possible de créer ou de supprimer les cases du plateau. 
+# Lors de la suppression, il est possible de cibler la case à supprimer.
+
+# Initialisation des variables
 case1_render = 0
 case2_render = 0
 case3_render = 0
@@ -20,6 +25,7 @@ def createCasesButton(canvas, NW, case1, case2, case3, case4, case5, case6, case
     global case8_render
     global case9_render
 
+    # Création du rendu des 9 boutons du plateau
     case1_render = canvas.create_window(39, 60, anchor=NW, window=case1)
     case2_render = canvas.create_window(213, 60, anchor=NW, window=case2)
     case3_render = canvas.create_window(389, 60, anchor=NW, window=case3)

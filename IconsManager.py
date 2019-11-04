@@ -1,3 +1,8 @@
+# Il s'agit du module de gestion des pions (2 au total). 
+# Ce module permet de placer et de supprimer les pions des joueurs du plateau. 
+# La création est ciblée à un seul pion, alors que la fonction de suppression supprime tous les pions.
+
+# Initialisation des variables
 icon_bird1_render = 0
 icon_bird2_render = 0
 icon_bird3_render = 0

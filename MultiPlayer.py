@@ -1,5 +1,9 @@
-# Ce module regroupe un enssemble d'instruction utile a la connexion au serveur 3tS (TicTacToe Server) 
-# L'authentification des clients est réalisé par un token unique, merci de ne pas connecter un client autre que celui-ci
+# Ce module regroupe un ensemble d'instructions utiles à la connexion au serveur 3ts (TicTacToe Serveur). 
+# L'authentification des clients est réalisée par un token unique, merci de ne pas connecter un client autre que celui-ci. 
+# Ce module permet de gérer toutes les requêtes recu et envoyer entre le client et le serveur. 
+# Il permet aussi de gérer les flux de connexion avec le serveur par le biais d'un socket. 
+# Suite à certaines contraintes technique dû à la mauvaise prise en charge de python par le serveur, 
+# le programme serveur n'a donc pas pu être développé en Python mais en java.
 
 import socket
 import Utils as utils
@@ -11,9 +15,9 @@ import IconsManager as iconsmanager
 multiplayer = False
 quitMP = True
 
-# Les données suivantes corresponde au serveur d'authentification des clients
-# Ne pas changer les données ci-dessous
-# Si le serveur est inaccessible, les requêtes peuvent être redirigé vers un serveur local
+# Les données suivantes correspondent au serveur d'authentification des clients. 
+# Ne pas changer les données ci-dessous. Si le serveur est inaccessible, 
+# les requêtes peuvent être redirigées vers un serveur local
 hote = "217.182.67.57"
 port = 1212
 
@@ -64,7 +68,7 @@ def disconnect():
     multiplayer = False
     global_soc.close()
 
-# Écoute des instruction du serveur
+# Écoute des instructions du serveur
 def listeningLoop(soc):
     global run
 

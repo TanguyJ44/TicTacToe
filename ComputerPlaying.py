@@ -1,3 +1,7 @@
+# Ce module est principalement axé sur le mode de jeu de l'ordinateur (le Bot). 
+# Cela permet à l'ordinateur d'obtenir toutes les ressources dont il a besoin 
+# pour organiser son jeu et pouvoir placer automatiquement ses pions sur le plateau.
+
 from random import randint
 import IconsManager as iconsmanager
 import CasesManager as casesmanager

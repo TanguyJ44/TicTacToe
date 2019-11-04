@@ -1,9 +1,8 @@
-# Ce module permet à l'ordinateur de jouer en respectant une démarche de réflexion.
-# Cela évite à l'ordinateur de jouer ses pions aléatoirement. Dans ce module,
-# l'ordinateur prend une décision parmis les choix suivants :
-# Soit l'ordinateur ce défend pour éviter que le joueur gagne, soit il décide d'attaquer.
-# Cette décision est prise en fonction de l'analyse du plateau de jeu réalisé en amont de
-# la prise de désision.
+# Ce module permet à l'ordinateur de jouer en respectant une démarche de réflexion. 
+# Cela évite à l'ordinateur de jouer ses pions aléatoirement. 
+# Dans ce module, l'ordinateur prend une décision parmi les choix suivants : 
+# Soit l'ordinateur se défend pour éviter que le joueur gagne, soit il décide d'attaquer. 
+# Cette décision est prise en fonction de l'analyse du plateau de jeu réalisé en amont de la prise de décision.
 
 from random import randint
 
@@ -17,7 +16,7 @@ defend = 0
 attack = 0
 
 # Cette fonction permet à l'ordinateur d'analyser le jeu actuel
-# En fonction de l'état d'avancement du jeu, il prendra une désision
+# En fonction de l'état d'avancement du jeu, il prendra une décision
 def calcCombinations(c_player, c_computer):
     global combinationsTreated
     global computerAttackTreated
@@ -36,7 +35,7 @@ def calcCombinations(c_player, c_computer):
     print(defend)
     print(attack)
 
-    # En fonction de l'analyse, l'ordinateur prend la désision la plus approprié
+    # En fonction de l'analyse, l'ordinateur prend la décision la plus appropriée
     if(defend > 0 and attack == 0):
         return defend
     elif(attack > 0 and defend == 0):

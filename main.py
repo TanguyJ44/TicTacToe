@@ -1,3 +1,8 @@
+# Il s'agit du module principal du programme. 
+# Le programme doit être exécuté seulement depuis ce module. 
+# Ce module constitue principalement la création d'une fenêtre avec ses objets. 
+# Ce programme est constitué d'un ensemble de 7 modules
+
 from tkinter import *
 import os
 import IconsManager as iconsmanager
@@ -7,7 +12,7 @@ import Utils as utils
 import MultiPlayer as multiplayer
 import sys
 
-# Initialisation de la frame
+# Initialisation de la Frame
 Frame = Tk()
 
 # Définition d'attributs
@@ -18,7 +23,7 @@ Frame.resizable(width=False, height=False)
 canvas = Canvas(Frame,width=1000,height=650,bg="white")
 canvas.pack()
 
-# Définition des ressources
+# Définition des ressources type images
 base_folder = os.path.dirname(__file__)
 image_path_bg = os.path.join(base_folder, 'imgs/background.png')
 image_path_sheep = os.path.join(base_folder, 'imgs/sheep.png')
@@ -42,17 +47,21 @@ image_multi = PhotoImage(file = image_path_multi)
 image_frame_multi = PhotoImage(file = image_path_frame_multi)
 
 # Placement des composants sur le canvas
-
+# Création du background
 canvas.create_image(0, 0, image=photo, anchor=NW)
+# Création des labels pions
 label_player = canvas.create_text(850,260,fill="black",font="null 20",text="Votre Pion")
 label_computer = canvas.create_text(850,380,fill="black",font="null 20",text="Ordinateur")
 
+# Label d'information du jeu
 info_txt = canvas.create_text(180,619,fill="#0A7E70",font="null 15",text="C'est à vous de jouer !")
 game_mode = canvas.create_text(840,619,fill="#0A7E70",font="null 15",text="Mode de jeu : Joueur VS Bot")
 
+# Bouton d'échange de pion
 switchBtn = Button(Frame, anchor = W, image=image_switch, bg="#15BDAC", command=lambda: switchingIcon())
 switchBtn.configure(width=30, height=15, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 
+# Bouton multijoueur
 multiBtn = Button(Frame, anchor = W, image=image_multi, bg="#15BDAC", command=lambda: utils.createMultiFrame(canvas, NW, image_frame_multi, multiBtn, 1))
 multiBtn.configure(width=199, height=50, activebackground = "#15BDAC", relief = FLAT, cursor='hand2')
 

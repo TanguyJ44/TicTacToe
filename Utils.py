@@ -1,3 +1,7 @@
+# Ce module regroupe un ensemble d'instructions permettant d'effectuer tout type d'actions. 
+# Il s'agit en quelque sorte d'une classe "fourre-tout" qui reste néanmoins bien pratique 
+# pour y stocker toutes les fonctions utiles au bon fonctionnement du jeu.
+
 import IconsManager as iconsmanager
 import CasesManager as casesmanager
 import ComputerPlaying as computerplaying
@@ -119,20 +123,20 @@ def verifyWin(cases_player, cases_computer, canvas, NW, msg_draw, msg_win, msg_l
     if(3 in cases_computer and 5 in cases_computer and 7 in cases_computer):
         entity_win = 2
 
-    # Si le joueur gagne, la condition est vérifié
+    # Si le joueur gagne, la condition est vérifiée
     if entity_win == 1:
         print("Joueur gagne !")
         computerplaying.stop_computer_playing = 1
         printGameMsg(canvas, NW, 1, msg_draw, msg_win, msg_lose)
 
-    # Si l'ordinateur gagne, la condition est vérifié
+    # Si l'ordinateur gagne, la condition est vérifiée
     if entity_win == 2:  
         print("Ordinateur gagne !")  
         computerplaying.stop_computer_playing = 1
         printGameMsg(canvas, NW, 2, msg_draw, msg_win, msg_lose)
 
     cases_total = len(cases_player) + len(cases_computer)
-    # Si match nul, la condition est vérifié
+    # Si match nul, la condition est vérifiée
     if(cases_total == 9 and entity_win == 0):
         print("Match nul !")
         computerplaying.stop_computer_playing = 1
@@ -282,7 +286,7 @@ def updateMultiplayerLabel(status):
     elif status == 7:
         f_canvas.itemconfigure(mp_txt, text="Match Nul !")
 
-# Informer me joueur sur le mode de jeu
+# Informer le joueur sur le mode de jeu
 def switchGameMode():
     global mode
     global game_mode
