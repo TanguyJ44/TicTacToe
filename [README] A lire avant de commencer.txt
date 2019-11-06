@@ -14,6 +14,11 @@ Condition préalable :
 Lancement du jeu :
 	Pour lancer le jeu, il suffit d'exécuter le fichier 'main.py'
 
+Contraintes techniques:
+	Dans certains cas, le mode multijoueur ne pourra pas être utilisé, notamment sur les réseaux d'entreprises.
+	Il est fort possible que le mode multijoueur ne fonctionne pas sur le réseau Wi-Fi de SUPINFO. 
+	Il est donc conseillé d'utiliser son forfait 4G (en partage de connexion) ou un réseau domestique classique.
+
 Erreur possible :
 	Si le jeu refuse de se lancer, ou ne fonctionne pas correctement :
 	- Placer les fichiers du jeu dans un répertoire situer a la racine de votre disque

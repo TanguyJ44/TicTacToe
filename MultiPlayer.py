@@ -72,15 +72,12 @@ def disconnect():
 def listeningLoop(soc):
     global run
 
-    print("func")
-
     datas = ""
 
     while run:
         datas = soc.recv(4096)
 
         if(datas != ""):
-            print("Paquet : ", datas)
             packetAnalyzer(datas)
             datas = ""
 
@@ -102,8 +99,6 @@ def packetAnalyzer(packet):
         case = packet[4:]
         case = case[:1]
 
-        print(case)
-
         casesmanager.deleteCase(utils.f_canvas, int(case))
         if main_player == True:
             iconsmanager.setIcon(utils.f_canvas, 0, int(case), utils.icon_bird, utils.icon_sheep, utils.f_NW)
@@ -119,14 +114,12 @@ def packetAnalyzer(packet):
         if "1" in packet:
             main_player = True
             computerplaying.player_play = 1
-            print("wait 1")
         else:
             main_player = False
             computerplaying.player_play = 0
             utils.updateMultiplayerLabel(3)
             utils.f_canvas.itemconfigure(utils.info_txt, text="C'est à l'Adversaire de jouer !")
             utils.f_canvas.coords(utils.info_txt, 215, 619)
-            print("wait 2")
 
     elif "newplayer" in packet:
         utils.updateMultiplayerLabel(3)

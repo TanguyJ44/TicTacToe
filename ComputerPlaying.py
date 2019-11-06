@@ -88,6 +88,5 @@ def setCaseIcon(canvas, caseId, icon_bird, icon_sheep, NW, msg_draw, msg_win, ms
             canvas.coords(info_txt, 215, 619)
             data = "case"
             data += str(caseId)
-            print(data)
             multiplayer.sendPacket(data)
 

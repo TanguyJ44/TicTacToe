@@ -32,9 +32,6 @@ def calcCombinations(c_player, c_computer):
     # Analyse du jeu en mode attaque
     computerAttack(c_computer)
 
-    print(defend)
-    print(attack)
-
     # En fonction de l'analyse, l'ordinateur prend la décision la plus appropriée
     if(defend > 0 and attack == 0):
         return defend
